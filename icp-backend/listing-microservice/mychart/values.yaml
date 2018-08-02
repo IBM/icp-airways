@@ -1,0 +1,72 @@
+replicaCount: 3
+
+metadata:
+ name: listingsvc 
+ label: listingsvc
+
+image:
+  name: listingsvc
+  imageName: "icpdevcluster.icp:8500/default/listing-microservice:latest" 
+  imagePullPolicy: IfNotPresent
+  ports:
+    containerPort: 3002
+
+envOfSecrets:
+  envUID:
+    name: UID
+    secretKeyRef:
+      name: mysecret
+      key: UID
+  envPASSWORD:
+    name: PASSWORD
+    secretKeyRef:
+      name: mysecret
+      key: PASSWORD
+  envSECRET:
+    name: SECRET
+    secretKeyRef:
+      name: mysecret
+      key: SECRET
+
+envOfConfigmaps:
+  envNODE_ENV:
+    name: NODE_ENV
+    configMapKeyRef:
+      name: env-database
+      key: NODE_ENV
+  envDATABASE:
+    name: DATABASE
+    configMapKeyRef:
+      name: env-database
+      key: DATABASE
+  envPORT:
+    name: PORT
+    configMapKeyRef:
+      name: env-database
+      key: PORT
+  envHOSTNAME:
+    name: HOSTNAME
+    configMapKeyRef:
+      name: env-database
+      key: HOSTNAME
+  envPROTOCOL:
+    name: PROTOCOL
+    configMapKeyRef:
+      name: env-database
+      key: PROTOCOL
+
+
+service:
+  serviceMetadata:
+    name: listingsvc
+    labels:
+      app: listingsvc
+  selector:
+    selectorName: listingsvc
+  servicePortConfiguration:
+    protocol: TCP
+    name: listingsvc
+    type: NodePort
+    port: 3002
+    targetPort: 3002
+    nodePort: 30092

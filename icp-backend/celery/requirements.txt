@@ -1,0 +1,4 @@
+Flask==0.12.2
+celery>=4.0
+requests==2.19.1
+flask-cors

@@ -1,0 +1,56 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: ethereumsvc 
+spec:
+ replicas: 3
+ template:
+   metadata:
+     name: ethereumsvc
+     labels:
+       app: ethereumsvc
+   spec:
+     containers:
+       - name: ethereumsvc
+         image: "mycluster.icp:8500/default/ethereum-microservice:latest" 
+         imagePullPolicy: Always
+         env:
+          - name: HttpProvider
+            valueFrom:
+              configMapKeyRef:
+                name: env-database
+                key: HttpProvider
+          - name: CONTRACTADRESS
+            valueFrom:
+              configMapKeyRef:
+                name: env-database
+                key: CONTRACTADRESS
+          - name: ETHEREUMACCOUNT
+            valueFrom:
+              configMapKeyRef:
+                name: env-database
+                key: ETHEREUMACCOUNT
+          - name: SECRET
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: SECRET
+         ports:
+         - containerPort: 3008
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: ethereumsvc
+ labels:
+   app: ethereumsvc
+spec:
+ type: NodePort
+ selector:
+   app: ethereumsvc
+ ports:
+  - protocol: TCP
+    name: ethereumsvc
+    port: 3008
+    targetPort: 3008
+    nodePort: 30089

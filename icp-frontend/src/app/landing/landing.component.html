@@ -1,0 +1,129 @@
+<div class="lp-container">
+  <div *ngIf="loading" class="main">
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s7 img-container">
+      <div>
+        <img src="assets/images/airplane.svg" class="bg-fa" [@movePlane]="true">
+      </div>
+      <div class="content-container" [style.opacity]="displayHeading ? 1: 0">
+        <div class="heading-container">
+          <h2>ICP Airways</h2>
+          <p>Get the best, most economical and updated afresh listings here !</p>
+        </div>
+        <div class="get-started-btn-container">
+          <button class="gs-btn waves-effect" (click)="test()">Get Started</button>
+        </div>
+      </div>
+    </div>
+    <div class="col s5">
+      <div class="lr-container">
+        <app-slide-auth [activePane]="isLeftVisible? 'left': 'right'">
+          <div class="left-pane action-container" leftPane>
+            <h5 class="action-title">Log in to continue</h5>
+            <div class="row form-container">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="email" class="email-ip" id="login-email" [(ngModel)]="email" name="l-email">
+                    <label for="login-email">Email</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="password" class="password-ip" id="login-password" [(ngModel)]="password" name="l-password">
+                    <label for="login-password">Password</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s12">
+                    <button type="submit" class="waves-effect action-btn" (click)="login()">Login</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="right-pane action-container" rightPane>
+            <h5 class="action-title">Register here</h5>
+            <div class="row form-container">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" class="fname-ip" id="register-fname" [(ngModel)]="firstName" name="r-firstName">
+                    <label for="register-fname">First Name</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" class="lname-ip" id="register-lname" [(ngModel)]="lastName" name="r-lastName">
+                    <label for="register-lname">Last Name</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" class="location-ip" id="register-location" [(ngModel)]="location" name="r-location">
+                    <label for="register-location">Location</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="number" class="age-ip" id="register-age" [(ngModel)]="age" name="r-age">
+                    <label for="register-age">Age</label>
+                  </div>
+                </div>
+                <ng-container *ngIf="modalData">
+                    <div *ngFor="let data of modalData; let i = index">
+                        <div class="row">
+                      <div *ngIf = "data">
+                      <input  name = {{i}} [value]='data' type="radio" [(ngModel)]="tier" id = {{i}} >        
+                      <label for = {{i}}> {{data}} </label>
+                      </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="email" class="lname-ip" id="register-email" [(ngModel)]="emailSignup" name="r-email">
+                    <label for="register-email">Email</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="password" class="lname-ip" id="register-password" [(ngModel)]="passwordSignup" name="r-password">
+                    <label for="register-password">Password</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s12">
+                    <button type="submit" class="waves-effect action-btn" (click)="signup()">Register</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </app-slide-auth>
+        <div class="navigate-btn-container">
+
+          <div class="nav-controls-container">
+
+            <span *ngIf="!isLeftVisible" [style.opacity]="!isLeftVisible ? 1 : 0">
+              <button class="navigate-btn" (click)="isLeftVisible = !isLeftVisible">
+                <i class="material-icons">keyboard_arrow_left</i>Login</button>
+            </span>
+            <span *ngIf="isLeftVisible" [style.opacity]="isLeftVisible ? 1 : 0">Don't have an account?
+              <button class="navigate-btn" (click)="isLeftVisible = !isLeftVisible;">Click Here</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

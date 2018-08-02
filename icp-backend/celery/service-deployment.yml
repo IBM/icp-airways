@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: celerysvc 
+spec:
+ replicas: 3
+ template:
+   metadata:
+     name: celerysvc
+     labels:
+       app: celerysvc
+   spec:
+     containers:
+       - name: celerysvc
+         image: "mycluster.icp:8500/default/celery:latest" 
+         imagePullPolicy: Always
+         ports:
+         - containerPort: 4000
+         env:
+          - name: CELERY_RESULT_BACKEND
+            valueFrom:
+              configMapKeyRef:
+                name: env-database
+                key: CELERY_RESULT_BACKEND
+          - name: CELERY_BROKER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: env-database
+                key: CELERY_BROKER_URL
+          - name: EMAILAPI
+            valueFrom:
+              configMapKeyRef:
+                name: env-database
+                key: EMAILAPI
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: celerysvc
+ labels:
+   app: celerysvc
+spec:
+ type: NodePort
+ selector:
+   app: celerysvc
+ ports:
+  - protocol: TCP
+    name: celerysvc
+    port: 4000
+    targetPort: 4000
+    nodePort: 30989

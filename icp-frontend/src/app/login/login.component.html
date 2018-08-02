@@ -1,0 +1,46 @@
+<nav>
+  <div class="nav-wrapper colour-pink">
+    <a href="" class="brand-logo center">FlyICP</a>
+    <ul id="nav-mobile" class="left">
+      <li><a routerLink="/login">Login</a></li>
+    </ul>
+    <ul id="nav-mobile" class="right">
+      <li><a routerLink="/signup">Register</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div style="text-align: center;">
+  <div class="section"></div>
+  <div class="section"></div>
+  <div class="container">
+    <div class="z-depth-2 grey lighten-5 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+      <div class="col s12" method="POST" autocomplete="off">
+        <div class='row'>
+          <div class='col s12'>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input class='validate' type='email' name='email' id='email' required="required" [(ngModel)]="email" />
+            <label for='email'>Email</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input class='validate' type='password' name='password' id='password' required="required" [(ngModel)]="password"/>
+            <label for='password'>Password</label>
+          </div>
+        </div>
+        <br/>
+        <div style="text-align: center;">
+          <div class='row'>
+            <button type='submit' id='btn_login' name='btn_login' class='col s12 btn btn-large waves-effect colour-pink' (click)="login()">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <a href="sign_up.html">Create an account</a> -->
+  <button id='btn_sign_up' name='btn_sign_up' class='btn btn-large waves-effect colour-pink' routerLink="/signup">Register</button>
+</div>
