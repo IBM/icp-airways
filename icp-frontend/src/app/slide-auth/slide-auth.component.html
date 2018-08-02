@@ -1,0 +1,8 @@
+<div class="action-content-container" [@slide]="activePane">
+  <div>
+    <ng-content select="[leftPane]"></ng-content>
+  </div>
+  <div>
+    <ng-content select="[rightPane]"></ng-content>
+  </div>
+</div>

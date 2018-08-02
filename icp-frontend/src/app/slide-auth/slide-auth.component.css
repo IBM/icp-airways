@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  overflow: hidden;
+  height: 85%;
+  /* width: 100%; */
+}
+
+.action-content-container {
+  width: 200%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-content-container div {
+  flex: 1;
+  height: 100%;
+}

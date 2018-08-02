@@ -1,0 +1,72 @@
+replicaCount: 3
+
+metadata:
+ name: checkinsvc 
+ label: checkinsvc
+
+image:
+  name: checkinsvc
+  imageName: "icpdevcluster.icp:8500/default/checkin-microservice:latest" 
+  imagePullPolicy: IfNotPresent
+  ports:
+    containerPort: 3001
+
+envOfSecrets:
+  envUID:
+    name: UID
+    secretKeyRef:
+      name: mysecret
+      key: UID
+  envPASSWORD:
+    name: PASSWORD
+    secretKeyRef:
+      name: mysecret
+      key: PASSWORD
+  envSECRET:
+    name: SECRET
+    secretKeyRef:
+      name: mysecret
+      key: SECRET
+
+envOfConfigmaps:
+  envNODE_ENV:
+    name: NODE_ENV
+    configMapKeyRef:
+      name: env-database
+      key: NODE_ENV
+  envDATABASE:
+    name: DATABASE
+    configMapKeyRef:
+      name: env-database
+      key: DATABASE
+  envPORT:
+    name: PORT
+    configMapKeyRef:
+      name: env-database
+      key: PORT
+  envHOSTNAME:
+    name: HOSTNAME
+    configMapKeyRef:
+      name: env-database
+      key: HOSTNAME
+  envPROTOCOL:
+    name: PROTOCOL
+    configMapKeyRef:
+      name: env-database
+      key: PROTOCOL
+
+
+service:
+  serviceMetadata:
+    name: checkinsvc
+    labels:
+      app: checkinsvc
+  selector:
+    selectorName: checkinsvc
+  servicePortConfiguration:
+    protocol: TCP
+    name: checkinsvc
+    type: NodePort
+    port: 3001
+    targetPort: 3001
+    nodePort: 30091

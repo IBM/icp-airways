@@ -1,0 +1,260 @@
+<div class="content-container row">
+  <div *ngIf="loading" class="main">
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+  </div>
+  <header class="col s2">
+    <div class="side-nav-container">
+      <ul>
+        <div class="center-align">
+          <div>
+            <span style="color: white; font-size: 0.75rem">Powered By</span>
+          </div>
+          <img id="logo" class="center-align" src="assets/images/ibm.svg">
+        </div>
+
+        <li>
+          <a routerLink="/history" class="waves-effect waves-red white-text ">
+            <i class="material-icons white-text">dashboard</i>Dashboard</a>
+        </li>
+        <li>
+          <a routerLink="/home" class="waves-effect waves-red white-text active colour-pink">
+            <i class="material-icons white-text">flight</i>Browse Flights</a>
+        </li>
+        <li>
+          <a class="waves-effect waves-red white-text" routerLink="/login">
+            <i class="material-icons white-text">exit_to_app</i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="col s10 right-content">
+    <div>
+      <nav class="nav-extended">
+        <div class="nav-wrapper">
+          <h5 class="brand-logo">Browse Flights</h5>
+          <ul id="dropdown1" class="dropdown-content">
+            <li>
+              <a class="black-text waves-effect waves-red">Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a class="black-text waves-effect waves-red" routerLink="/login">
+                <i class="right material-icons">exit_to_app</i>Logout</a>
+            </li>
+          </ul>
+          <div id="navbar">
+            <ul class="right hide-on-large-only">
+              <li>
+                <a data-activates="slide-out" class="button-collapse waves-effect waves-red" style="margin:0;">
+                  <i class="material-icons">menu</i>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-button waves-effect waves-red" data-gutter="5" data-constrainwidth="false" data-beloworigin="false" data-hover="false"
+                  data-activates="dropdown1">
+                  <i id="usericon" class="material-icons">more_vert</i>
+                </a>
+              </li>
+            </ul>
+
+            <!-- IBM Logo -->
+            <a class="brand-logo left hide-on-large-only">
+              <img id="logo1" src="https://www.computing.co.uk/w-images/b44309b9-5c20-48b3-8cd2-8ccfbe521685/0/ibmlogoblack-580x358.jpg"
+                style="width:3em;">
+            </a>
+
+            <!-- Logout dropdown -->
+            <ul id='logout_dropdown' class='collection dropdown-content z-depth-5' style="min-width:420px">
+              <div class="row valign-wrapper hide-on-med-and-down" style="margin-top:1.5em;margin-bottom:-.4em;">
+                <div class="container">
+                  <img class="circle" src="https://raw.githubusercontent.com/arjuntherajeev/arjuntherajeev.github.io/master/src/user-icon.png"
+                    style="width:8em;margin-left:1em;">
+                  <a>
+                    <div class="circle overlay">
+                      <div class="text center" style="margin-top:-0.2em;">
+                        <i class="material-icons" style="font-size:1.5em;">add_a_photo</i>
+                        <h6 style="margin-top:-1em;">Change Picture</h6>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col l7  m7 black-text" style="margin-top:-1em;">
+                  <h6 style="font-size:1.5em;"></h6>
+                  <h6 class="red-text text-darken-4" style="font-weight:400;font-size:1em;">User</h6>
+                  <div class="col l6">
+                    <a class="blue-text text-darken-4" style="font-size:0.8em;margin-left:-2em;">
+                      <i class="material-icons left tiny" style="margin-right:.2em;">help</i>Help</a>
+                  </div>
+                  <div class="col l3">
+                    <a class="waves-effect waves-light black btn" routerLink="/login" style="font-size:0.8em;margin-left:-2.5em;">Logout</a>
+                  </div>
+                </div>
+              </div>
+            </ul>
+
+            <ul class="right hide-on-med-and-down valign-wrapper">
+              <li>
+                <a class=" waves-effect waves-light dropdown-button center" routerLink="/login" data-activates='logout_dropdown' data-gutter="4"
+                  alignment='right'>
+                  <img src="https://raw.githubusercontent.com/arjuntherajeev/arjuntherajeev.github.io/master/src/user-icon.png" style="width:2em;position:inherit;margin-bottom:1.25em;margin-top:1em;margin-left:0.1em;"
+                    class="circle valign">
+                </a>
+              </li>
+            </ul>
+
+            <ul class="tabs tabs-transparent hide-on-large-only" id="mob-tabs">
+              <li class="tab">
+                <a class="active waves-effect waves-red" routerLink="/history">
+                  <i class="material-icons">dashboard</i>
+                </a>
+              </li>
+              <li class="tab">
+                <a class="waves-effect waves-red" routerLink="/home">
+                  <i class="material-icons">flight</i>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="content scroll">
+      <div class="scroll-content" style="padding:10px 20px;">
+        <div class="row" method="POST">
+          <div class="input-field col s4">
+            <input id="source" name="source" type="text" [(ngModel)]="origin" placeholder="Source" />
+            <!-- <div class = "search-drop-down ">
+              <div class = "search-results" *ngFor = "let data of provider.rawData">
+                {{data.name}}
+              </div>
+            </div> -->
+            <!-- <label for="source">Source</label> -->
+          </div>
+          <div class="input-field col s4">
+            <input id="destination" name="destination" type="text" [(ngModel)]="dest" placeholder="Destination" />
+            <!-- <label for="destination">Destination</label> -->
+          </div>
+          <div class="input-field col s3">
+            <input placeholder="Date" id="date" name="date" type="date" [(ngModel)]="date" />
+          </div>
+          <div class="input-field col s1 search-btn-container" style="text-align: center;">
+            <div type='submit' id='btn_search' name='btn_login' class='waves-effect colour-pink' (click)="search()">
+              <span>Search</span>
+            </div>
+            <!-- <a class="style btn waves-effect colour-pink" (click)="clear()">Clear</a> -->
+          </div>
+        </div>
+        <!-- END FILTER SEARCH -->
+
+        <!-- TABLE TO POPULATE WITH FLIGHT DATA :) -->
+        <!-- *ngIf="show" -->
+        <ng-container *ngIf="show">
+          <div id="my_table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Flight No.</th>
+                  <th>Tail No.</th>
+                  <th>Depart. Time</th>
+                  <th>Arrival Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+            </table>
+            <ng-container *ngFor="let listshow of show.data">
+              <div class="card row flight-info">
+                <div class="col s3">
+                  <p>{{listshow.FLIGHTNUM}}</p>
+                </div>
+                <div class="col s3">
+                  <p>{{listshow.TAILNUM}}</p>
+                </div>
+                <div class="col s3">
+                  <p>{{listshow.DEPTIME | timeRefactor}}</p>
+                </div>
+                <div class="col s3">
+                  <p>{{listshow.ARRTIME | timeRefactor}}</p>
+                </div>
+                <div class="col s3">
+                  <!-- <button  type='submit'
+                    id='btn_book' name='btn_login' class='btn waves-effect colour-pink' (click)="book(listshow.ID)">Book</button> -->
+                  <button type='submit' id='btn_book' name='btn_login' class='btn waves-effect colour-pink' (click)="ask(listshow.ORIGIN,listshow.DEST,provider.userData.data.FIRSTNAME,listshow.ID)">Book</button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+        <br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+        <h4>Select Pricing</h4>
+        <ng-container *ngIf="modalData">
+          <div *ngFor="let data of modalData.flightBooking.offers; let i = index">
+            <div *ngIf = "data.offerType === 'Pricing'">
+            <input  name = {{i}} [value]='data.offerName + "," + data.offerType + "," + data.cost.toString()' type="radio" [(ngModel)]="radioSelected" id = {{i}} >        
+    
+            <label for = {{i}}> {{data.offerName}}({{data.cost}}) </label>
+            </div>
+          </div>
+        </ng-container>
+        <h4>Select Upgrades</h4>
+        <ng-container *ngIf="modalData">
+          <div *ngFor="let data of modalData.flightBooking.offers; let i = index">
+            <div *ngIf = "data.offerType === 'Upgrade'">
+            <input  name={{i}} [value]='data.offerName + "," + data.offerType + "," + data.cost.toString()' type="radio" [(ngModel)]="radioSelected2" id = {{i}}/>        
+    
+            <label for = {{i}}> {{data.offerName}}({{data.cost}}) </label>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+        <a class="waves-effect waves-green btn-flat" (click)="bookFlight()">Book</a>
+      </div>
+  </div>
+
+
+<!-- <div id="modal1" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+  <div class="modal-content">
+    <h4>Select Pricing</h4>
+    <ng-container *ngIf="modalData">
+      <div *ngFor="let data of modalData.flightBooking.offers; let i = index">
+        <div *ngIf = "data.offerType === 'Pricing'">
+        <input  name = {{i}} [value]='data.offerName + "," + data.offerType + "," + data.cost.toString()' type="radio" [(ngModel)]="radioSelected" id = {{i}} >        
+
+        <label for = {{i}}> {{data.offerName}}({{data.cost}}) </label>
+        </div>
+      </div>
+    </ng-container>
+    <h4>Select Upgrades</h4>
+    <ng-container *ngIf="modalData">
+      <div *ngFor="let data of modalData.flightBooking.offers; let i = index">
+        <div *ngIf = "data.offerType === 'Upgrade'">
+        <input  name={{i}} [value]='data.offerName + "," + data.offerType + "," + data.cost.toString()' type="radio" [(ngModel)]="radioSelected2" id = {{i}}/>        
+
+        <label for = {{i}}> {{data.offerName}}({{data.cost}}) </label>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+    <a class="waves-effect waves-green btn-flat" (click)="bookFlight()">Book</a>
+  </div>
+</div> -->

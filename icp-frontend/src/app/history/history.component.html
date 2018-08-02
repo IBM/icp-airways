@@ -1,0 +1,186 @@
+<div class="content-container row">
+    <div *ngIf = "loading" class = "main">
+        <div class="spinner">
+          <div class="rect1"></div>
+          <div class="rect2"></div>
+          <div class="rect3"></div>
+          <div class="rect4"></div>
+          <div class="rect5"></div>
+        </div>
+      </div>
+  <header class="col s2">
+    <div class="side-nav-container">
+      <ul>
+        <div class="center-align">
+          <div>
+            <span style="color: white; font-size: 0.75rem">Powered By</span>
+          </div>
+          <img id="logo" class="center-align" src="assets/images/ibm.svg">
+        </div>
+
+        <li>
+          <a routerLink="/history" class="waves-effect waves-red white-text active colour-pink">
+            <i class="material-icons white-text">dashboard</i>Dashboard</a>
+        </li>
+        <li>
+          <a routerLink="/home" class="waves-effect waves-red white-text ">
+            <i class="material-icons white-text">flight</i>Browse Flights</a>
+        </li>
+        <li>
+          <a class="waves-effect waves-red white-text" >
+            <i class="material-icons white-text" (click)="test()">exit_to_app</i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="col s10 right-content">
+    <div>
+      <nav class="nav-extended">
+        <div class="nav-wrapper">
+          <h5 class="brand-logo">Browse Flights</h5>
+          <ul id="dropdown1" class="dropdown-content">
+            <li>
+              <a class="black-text waves-effect waves-red">Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a class="black-text waves-effect waves-red" routerLink="/login">
+                <i class="right material-icons">exit_to_app</i>Logout</a>
+            </li>
+          </ul>
+          <div id="navbar">
+            <ul class="right hide-on-large-only">
+              <li>
+                <a data-activates="slide-out" class="button-collapse waves-effect waves-red" style="margin:0;">
+                  <i class="material-icons">menu</i>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-button waves-effect waves-red" data-gutter="5" data-constrainwidth="false" data-beloworigin="false" data-hover="false"
+                  data-activates="dropdown1">
+                  <i id="usericon" class="material-icons">more_vert</i>
+                </a>
+              </li>
+            </ul>
+
+            <!-- IBM Logo -->
+            <a class="brand-logo left hide-on-large-only">
+              <img id="logo1" src="https://www.computing.co.uk/w-images/b44309b9-5c20-48b3-8cd2-8ccfbe521685/0/ibmlogoblack-580x358.jpg"
+                style="width:3em;">
+            </a>
+
+            <!-- Logout dropdown -->
+            <ul id='logout_dropdown' class='collection dropdown-content z-depth-5' style="min-width:420px">
+              <div class="row valign-wrapper hide-on-med-and-down" style="margin-top:1.5em;margin-bottom:-.4em;">
+                <div class="container">
+                  <img class="circle" src="https://raw.githubusercontent.com/arjuntherajeev/arjuntherajeev.github.io/master/src/user-icon.png"
+                    style="width:8em;margin-left:1em;">
+                  <a>
+                    <div class="circle overlay">
+                      <div class="text center" style="margin-top:-0.2em;">
+                        <i class="material-icons" style="font-size:1.5em;">add_a_photo</i>
+                        <h6 style="margin-top:-1em;">Change Picture</h6>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col l7  m7 black-text" style="margin-top:-1em;">
+                  <h6 style="font-size:1.5em;">Muhammed Fawaz</h6>
+                  <h6 class="red-text text-darken-4" style="font-weight:400;font-size:1em;">User</h6>
+                  <div class="col l6">
+                    <a class="blue-text text-darken-4" style="font-size:0.8em;margin-left:-2em;">
+                      <i class="material-icons left tiny" style="margin-right:.2em;">help</i>Help</a>
+                  </div>
+                  <div class="col l3">
+                    <a class="waves-effect waves-light black btn" routerLink="/login" style="font-size:0.8em;margin-left:-2.5em;">Logout</a>
+                  </div>
+                </div>
+              </div>
+            </ul>
+
+            <ul class="right hide-on-med-and-down valign-wrapper" >
+              <li>
+                <a class=" waves-effect waves-light dropdown-button center" data-activates='logout_dropdown' data-gutter="4"
+                  alignment='right'>
+                  <img src="https://raw.githubusercontent.com/arjuntherajeev/arjuntherajeev.github.io/master/src/user-icon.png" style="width:2em;position:inherit;margin-bottom:1.25em;margin-top:1em;margin-left:0.1em;"
+                    class="circle valign">
+                </a>
+              </li>
+            </ul>
+
+            <ul class="tabs tabs-transparent hide-on-large-only" id="mob-tabs">
+              <li class="tab">
+                <a class="active waves-effect waves-red" routerLink="/history">
+                  <i class="material-icons">dashboard</i>
+                </a>
+              </li>
+              <li class="tab">
+                <a class="waves-effect waves-red" routerLink="/home">
+                  <i class="material-icons">flight</i>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="content scroll">
+      <div class="scroll-content" style="padding:10px 20px;">
+        <!-- END FILTER SEARCH -->
+
+        <!-- TABLE TO POPULATE WITH FLIGHT DATA :) -->
+        <!-- *ngIf="show" -->
+        <ng-container *ngIf="show && provider.rawData">
+          <div id="my_table" >
+            <table>
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Destination</th>
+                  <!-- <th>Tail Number</th> -->
+                  <th>Departure Time</th>
+                  <th>Arrival Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+            </table>
+            <ng-container *ngFor="let listshow of show.data">
+              <div class="card row flight-info">
+                <div class="col s3">
+                  <p>{{listshow.ORIGIN | isoToCountryName }}</p>
+                </div>
+                <div class="col s3">
+                  <p>{{listshow.DEST | isoToCountryName }}</p>
+                </div>
+                <!-- <div class="col s3">
+                  <p>{{listshow.TAILNUM}}</p>
+                </div> -->
+                <div class="col s3">
+                  <p>{{listshow.DEPTIME | timeRefactor}}</p>
+                </div>
+                <div class="col s3">
+                  <p>{{listshow.ARRTIME | timeRefactor}}</p>
+                </div>
+                <ng-container *ngIf="listshow.CHECKIN === '0'">
+                  <div class="col s3">
+                    <button type='submit' id='btn_book' name='btn_login' class='btn waves-effect colour-pink' (click)="checkin(listshow.FLIGHTID,listshow.USERID,listshow.ORIGIN ,listshow.DEST )">CHECKIN</button>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="listshow.CHECKIN === '1'">
+                  <div class="col s3">
+                    <button type='submit' id='btn_book' name='btn_login' class='btn waves-effect colour-pink' disabled="disabled">CHECKIN</button>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+        <br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+</div>
