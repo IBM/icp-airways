@@ -43,9 +43,9 @@ When you've completed this code pattern, you will understand how to:
 
 * Break the application into different microservices
 * Deploy microservices based application on IBM Cloud Private
-* Leverag IBM Middlewares such as ODM and Db2 on Kubernetes
+* Leverage IBM Middlewares such as ODM and Db2 on Kubernetes
 * Design business rules and decision making by IBM ODM
-* Create distributed task ques using RabbitMQ and Celery
+* Create distributed task queues using RabbitMQ and Celery
 * Leverage Db2 as backend data storage
 * Deploy Ethereum smart contract on Hyperledger fabric by leveraging Hyperledger Burrow
 * Learn how to use IBM Cloud Private, Docker, and Kubernetes
@@ -121,7 +121,7 @@ $ sudo nano /etc/hosts
 
 ![pref](pref.png)
 
-4. Navigate to Daemon tab, click on the `+` button and add an entry `icpdns:85000`, click Apply & Restart button to restart Docker service. 
+4. Navigate to Daemon tab, click on the `+` button and add an entry `icpdns:85000`, click `Apply & Restart` button to restart Docker service. 
 
 ![dock-pi](dock-pi.png)
 
@@ -129,7 +129,7 @@ $ sudo nano /etc/hosts
 ```
 $ docker login icpdns:8500
 ```
-### Install all dependencies, create images and upload it to Private registery of IBM Cloud Private
+### Install all dependencies, create images and upload it to Private registry of IBM Cloud Private
 1. Booking Microservice
 ```s
 $ cd booking-microservice
@@ -261,7 +261,7 @@ path: your folder path you created in your icp proxy
 
 ![icp4](icp4.png)
 
-2. Click on configure, fil up the required field and deploy
+2. Click on configure, fill up the required field and deploy
 3. Follow this [tutorial](https://developer.ibm.com/recipes/tutorials/deploy-db2-into-ibm-cloud-private/) to deploy Db2 in IBM Cloud Private
 
 > Note: when asked for persistant volume claim give shared-pvc while filling the form to deploy Db2
@@ -302,7 +302,7 @@ $ db2  IMPORT FROM "path-where-flights.cvs-is-saved/flights.csv" OF DEL INSERT I
 ```
 ### Deplying RabbitMQ 
 1. Go to ```Catalog``` and filter ```rabbitmq```
-2. Select ```RabbitMQ```, Click ``` Configure```, fill the form and click on deploy
+2. Select ```RabbitMQ```, click ``` Configure```, fill the form and click on deploy
 3. Expose ampq port of rabbitmq
 ```
 $ kubectl expose deployment <rabbitmq deployment name> --name=mq-amqp --type=NodePort --port=5671
@@ -310,7 +310,7 @@ $ kubectl expose deployment <rabbitmq deployment name> --name=mq-amqp --type=Nod
 
 ### Deploying ODM
 1. Go to ```Catalog``` and filter ```odm```
-2. Select ```odm```, Click ``` Configure```, fill the form and click on deploy
+2. Select ```odm```, click ``` Configure```, fill the form and click on deploy
 
 ### Configuring ODM and loading buisness rules
 1. Go to ``` http://icpip:odmport/teamserver/faces/login.jsp```, and login with *username* ```rtsAdmin```, and pass ```rtsAdmin```
@@ -379,7 +379,7 @@ YWRtaW4=
 ### Configuring and deploying config-maps
 ![icp7](icp7.png)
 1. *DATABASE*: is your database name, which should be SAMPLE
-2. *PORT*: is your exposed Db2 port from port 5000, get this port by running and finding Db2 service ``` kubectl get service ```
+2. *PORT*: is your exposed Db2 port from port `5000`, get this port by running and finding Db2 service ``` kubectl get service ```
 3. *HOSTNAME*: is your icpip
 4. *ODM*: is your ODM buisness api you have created, get odm port number by running and finding the exposed port ``` kubectl get service ```
 5. *HttpProvider*: replace the ip with your icp ip. This is the provider to connect with ethereum proxy
