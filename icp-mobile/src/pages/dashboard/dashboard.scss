@@ -1,0 +1,21 @@
+page-dashboard {
+    ion-icon {
+        font-size: 5em;
+    }
+    footer {
+        position: relative;
+        height: 30px;
+        width: 100%;
+        background-color: #333333;
+    }
+
+    p.copyright {
+        position: absolute;
+        width: 100%;
+        color: #fff;
+        line-height: 10px;
+        font-size: 0.7em;
+        text-align: center;
+        bottom:0;
+    }
+}

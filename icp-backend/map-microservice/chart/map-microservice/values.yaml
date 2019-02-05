@@ -1,0 +1,81 @@
+replicaCount: 2
+
+metadata:
+ name: mapsvc 
+ label: mapsvc
+readinessProbe:
+  path: /healthz
+  port: 3016
+  initialDelaySeconds: 5
+  timeoutSeconds: 1
+  periodSeconds: 15
+
+livenessProbe:
+  path: /healthz
+  port: 3016
+  initialDelaySeconds: 5
+  timeoutSeconds: 1 
+  periodSeconds: 15
+
+hpa:
+  metadata:
+    name: mapmicroservicehpa
+  spec:
+    maxReplicas: 10
+    minReplicas: 1
+  metrics:
+    pods:
+      targetAverageValue: 30
+    resource:
+      name: cpu
+      targetAverageUtilization: 50
+    memory:
+      targetAverageUtilization: 50
+  scaleTargetRef:  
+    name: mapsvc
+
+image:
+  name: mapsvc
+  imageName: "s4saif/map-microservice:0.0.1" 
+  imagePullPolicy: Always
+  ports:
+    containerPort: 3016
+  requests:
+    cpu: "60m"
+    memory: "150Mi"
+  limits:
+    cpu: "80m"
+    memory: "200Mi"
+  maxSurge: 1
+  maxUnavailable: 0
+  lifecycle:
+    preStop:
+      command: ["/bin/bash", "-c", "sleep 20"]
+
+envOfConfigmaps:
+  envAPPID:
+    name: APPID
+    configMapKeyRef:
+      name: env-database
+      key: APPID
+  envAPPCODE:
+    name: APPCODE
+    configMapKeyRef:
+      name: env-database
+      key: APPCODE
+
+
+service:
+  serviceMetadata:
+    name: mapsvc
+    labels:
+      app: mapsvc
+  selector:
+    selectorName: mapsvc
+  servicePortConfiguration:
+    protocol: TCP
+    name: mapsvc
+    type: ClusterIP
+    port: 3016
+    targetPort: 3016
+

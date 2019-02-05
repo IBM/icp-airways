@@ -1,0 +1,138 @@
+page-signup {
+  footer {
+    position: relative;
+    height: 30px;
+    width: 100%;
+    background-color: #333333;
+}
+
+p.copyright {
+    position: absolute;
+    width: 100%;
+    color: #fff;
+    line-height: 10px;
+    font-size: 0.7em;
+    text-align: center;
+    bottom:0;
+}
+  .background {
+    background-image: url('../assets/bg.jpg');
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .scroll-content {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  ion-card.card {
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+  }
+
+  a,
+  p,
+  ion-card-header.card-header {
+    color: #fff !important;
+  }
+
+  .list>.item-block:first-child {
+    border: medium none;
+  }
+
+  ion-input {
+    ::placeholder {
+      color: #222 !important;
+    }
+  }
+
+  .item {
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border: medium none;
+
+    .text-input,
+      {
+      color: #fff;
+    }
+
+    input::-moz-placeholder {
+      color: #fff !important;
+    }
+
+    input:-moz-placeholder {
+      color: #fff !important;
+    }
+
+    *::-webkit-input-placeholder {
+      color: #fff !important;
+    }
+
+    *:-ms-input-placeholder {
+      color: #fff !important;
+    }
+
+    *:-moz-placeholder {
+      color: #fff !important;
+    }
+  }
+
+  .icon {
+    padding-right: 10px;
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 0;
+  }
+  .cc-selector-2 input{
+    position:absolute;
+    z-index:999;
+}
+
+.GOLD{background-image:url(https://cdn1.iconfinder.com/data/icons/web-design-18/50/45-512.png);}
+.SILVER{background-image:url(https://ya-webdesign.com/images/silver-badge-png-6.png);}
+.BRONZE{background-image:url(http://www.smurfsreviews.com/wp-content/uploads/2016/08/bronze-badge.png);}
+
+.cc-selector-2 input:active +.drinkcard-cc, .cc-selector input:active +.drinkcard-cc{opacity: .9;}
+.cc-selector-2 input:checked +.drinkcard-cc, .cc-selector input:checked +.drinkcard-cc{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.drinkcard-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.9);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.9);
+            filter: brightness(1.8) grayscale(1) opacity(.9);
+}
+.drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+/* Extras */
+a:visited{color:#888}
+a{color:#444;text-decoration:none;}
+p{margin-bottom:.3em;}
+.cc-selector-2 input{ margin: 5px 0 0 12px; }
+.cc-selector-2 label{ margin-left: 7px; }
+span.cc{ color:#6d84b4 }
+}

@@ -27,6 +27,10 @@
             <i class="material-icons white-text">flight</i>Browse Flights</a>
         </li>
         <li>
+          <a routerLink="/shop" class="waves-effect waves-red white-text ">
+            <i class="material-icons white-text">shopping_cart</i>shop</a>
+        </li>
+        <li>
           <a class="waves-effect waves-red white-text" routerLink="/login">
             <i class="material-icons white-text">exit_to_app</i>Logout</a>
         </li>
@@ -169,24 +173,25 @@
                 </tr>
               </thead>
             </table>
-            <ng-container *ngFor="let listshow of show.data">
+            <ng-container *ngFor="let data of show" >
               <div class="card row flight-info">
                 <div class="col s3">
-                  <p>{{listshow.FLIGHTNUM}}</p>
+                  <p>{{data._id}}</p>
                 </div>
                 <div class="col s3">
-                  <p>{{listshow.TAILNUM}}</p>
+                  <p>{{data.TailNum}}</p>
                 </div>
                 <div class="col s3">
-                  <p>{{listshow.DEPTIME | timeRefactor}}</p>
+                  <p>{{data.DepTime | timeRefactor}}</p>
                 </div>
                 <div class="col s3">
-                  <p>{{listshow.ARRTIME | timeRefactor}}</p>
+                  <p>{{data.ArrTime | timeRefactor}}</p>
                 </div>
                 <div class="col s3">
                   <!-- <button  type='submit'
                     id='btn_book' name='btn_login' class='btn waves-effect colour-pink' (click)="book(listshow.ID)">Book</button> -->
-                  <button type='submit' id='btn_book' name='btn_login' class='btn waves-effect colour-pink' (click)="ask(listshow.ORIGIN,listshow.DEST,provider.userData.data.FIRSTNAME,listshow.ID)">Book</button>
+                  <button type='submit' id='btn_book' name='btn_login' class='btn waves-effect colour-pink' (click)="book(data._id)">Book</button>
+                  <!-- (click)="ask(data.Origin,data.Dest,provider.userData.data.FIRSTNAME,data._id)" -->
                 </div>
               </div>
             </ng-container>
@@ -200,7 +205,7 @@
 </div>
 
 
-<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+<!-- <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
     <div class="modal-content">
         <h4>Select Pricing</h4>
         <ng-container *ngIf="modalData">
@@ -227,7 +232,7 @@
         <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
         <a class="waves-effect waves-green btn-flat" (click)="bookFlight()">Book</a>
       </div>
-  </div>
+  </div> -->
 
 
 <!-- <div id="modal1" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">

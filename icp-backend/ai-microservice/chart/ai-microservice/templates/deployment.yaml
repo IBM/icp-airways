@@ -1,0 +1,64 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: {{ .Values.metadata.name }} 
+spec:
+ replicas: {{ .Values.replicaCount }}
+ strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: {{ .Values.image.maxSurge }} 
+    maxUnavailable: {{ .Values.image.maxUnavailable }} 
+ template:
+   metadata:
+     annotations:
+       sidecar.istio.io/inject: "true"
+       traffic.sidecar.istio.io/excludeOutboundIPRanges: 0.0.0.0/0   
+     name: {{ .Values.metadata.name }} 
+     labels:
+       app: {{ .Values.metadata.label }} 
+   spec:
+     containers:
+       - name: {{ .Values.image.name }} 
+         image: {{ .Values.image.imageName }} 
+         readinessProbe:
+          httpGet: 
+            path: {{ .Values.readinessProbe.path }} 
+            port: {{ .Values.readinessProbe.port }} 
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }} 
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }} 
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }} 
+         livenessProbe:
+          httpGet:
+            path: {{ .Values.livenessProbe.path }} 
+            port: {{ .Values.livenessProbe.port }} 
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }} 
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }} 
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }} 
+         imagePullPolicy: {{ .Values.image.imagePullPolicy }} 
+         lifecycle:
+          preStop:
+            exec:
+              command: {{ .Values.image.lifecycle.preStop.command }} 
+         resources:
+          requests:
+            cpu: {{ .Values.image.requests.cpu }} 
+            memory: {{ .Values.image.requests.memory }} 
+          limits:
+            cpu: {{ .Values.image.limits.cpu }} 
+            memory: {{ .Values.image.limits.memory }} 
+         env:
+          - name: {{ .Values.envOfConfigmaps.envAPIKEY.name }} 
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envAPIKEY.configMapKeyRef.name }} 
+                key: {{ .Values.envOfConfigmaps.envAPIKEY.configMapKeyRef.key }} 
+          - name: {{ .Values.envOfConfigmaps.envASSISTANTID.name }} 
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envASSISTANTID.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envASSISTANTID.configMapKeyRef.key }}
+         ports:
+         - containerPort: {{ .Values.image.ports.containerPort }} 

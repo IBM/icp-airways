@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: listingsvc
+spec:
+  gateways:
+  - ingress-gateway
+  - mesh
+  hosts:
+  - listingsvc.svc.b.remote
+  http:
+  - route:
+    - destination:
+        host: listingsvc.default
+        port:
+          number: 80
+      weight: 100

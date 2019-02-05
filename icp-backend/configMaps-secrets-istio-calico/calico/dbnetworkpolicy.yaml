@@ -1,0 +1,71 @@
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: mongodbpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 27017
+  - from:
+    - podSelector:
+        matchLabels:
+          app: listingsvc
+  podSelector:
+    matchLabels:
+      app: saqrairwaymongo-ibm-mongodb-dev
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: db2policy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 50000
+  - from:
+    - podSelector:
+        matchLabels:
+          app: loginsvc
+  podSelector:
+    matchLabels:
+      app: saqrairway-ibm-db2oltp-dev
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: mariadbpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 3306
+  - from:
+    - podSelector:
+        matchLabels:
+          app: bookingsvc
+  podSelector:
+    matchLabels:
+      app: saqrairwaymariadbnew-ibm-mariadb-dev
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: rabbitmqpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 5671
+  - from:
+    - podSelector:
+        matchLabels:
+          app: celerysvc
+  podSelector:
+    matchLabels:
+      app: saqrairwayrabbitmq-ibm-rabbitmq-dev

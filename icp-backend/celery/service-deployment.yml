@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
  name: celerysvc 
 spec:
- replicas: 3
+ replicas: 1
  template:
    metadata:
      name: celerysvc
@@ -12,8 +12,15 @@ spec:
    spec:
      containers:
        - name: celerysvc
-         image: "mycluster.icp:8500/default/celery:latest" 
+         image: "mycluster.icp:8500/default/celery:0.0.1" 
          imagePullPolicy: Always
+         resources:
+          requests:
+            cpu: "80m"
+            memory: "100Mi"
+          limits:
+            cpu: "100"
+            memory: "150Mi"
          ports:
          - containerPort: 4000
          env:
@@ -40,7 +47,7 @@ metadata:
  labels:
    app: celerysvc
 spec:
- type: NodePort
+ type: ClusterIP
  selector:
    app: celerysvc
  ports:
@@ -48,4 +55,3 @@ spec:
     name: celerysvc
     port: 4000
     targetPort: 4000
-    nodePort: 30989

@@ -1,0 +1,74 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: {{ .Values.metadata.name }} 
+spec:
+ replicas: {{ .Values.replicaCount }}
+ strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: {{ .Values.image.maxSurge }} 
+    maxUnavailable: {{ .Values.image.maxUnavailable }} 
+ template:
+   metadata:
+     name: {{ .Values.metadata.name }} 
+     annotations:
+      sidecar.istio.io/inject: "true"
+     labels:
+       app: {{ .Values.metadata.label }} 
+   spec:
+     containers:
+     containers:
+       - name: {{ .Values.image.name }} 
+         image: {{ .Values.image.imageName }} 
+         readinessProbe:
+          httpGet: 
+            path: {{ .Values.readinessProbe.path }} 
+            port: {{ .Values.readinessProbe.port }} 
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }} 
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }} 
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }} 
+         livenessProbe:
+          httpGet:
+            path: {{ .Values.livenessProbe.path }} 
+            port: {{ .Values.livenessProbe.port }} 
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }} 
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }} 
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }} 
+         imagePullPolicy: {{ .Values.image.imagePullPolicy }} 
+         lifecycle:
+          preStop:
+            exec:
+              command: {{ .Values.image.lifecycle.preStop.command }} 
+         resources:
+          requests:
+            cpu: {{ .Values.image.requests.cpu }} 
+            memory: {{ .Values.image.requests.memory }} 
+          limits:
+            cpu: {{ .Values.image.limits.cpu }} 
+            memory: {{ .Values.image.limits.memory }} 
+         env:
+          - name: {{ .Values.envOfSecrets.envMONGOUSERNAME.name }} 
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.envOfSecrets.envMONGOUSERNAME.secretKeyRef.name }} 
+                key: {{ .Values.envOfSecrets.envMONGOUSERNAME.secretKeyRef.key }} 
+          - name: {{ .Values.envOfSecrets.envMONGOPASSWORD.name }} 
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.envOfSecrets.envMONGOPASSWORD.secretKeyRef.name }} 
+                key: {{ .Values.envOfSecrets.envMONGOPASSWORD.secretKeyRef.key }} 
+          - name: {{ .Values.envOfConfigmaps.envMONGOPORT.name }} 
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envMONGOPORT.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envMONGOPORT.configMapKeyRef.key }}
+          - name: {{ .Values.envOfConfigmaps.envHOSTNAMEMONGODB.name }} 
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envHOSTNAMEMONGODB.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envHOSTNAMEMONGODB.configMapKeyRef.key }}
+         ports:
+         - containerPort: {{ .Values.image.ports.containerPort }} 

@@ -2,19 +2,22 @@
 
 ## Microservices
 
-### Frontend [80:30080]
-
-Loads the UI and takes care of user sessions. Communicates with all other microservices.
-
 #### Endpoints:
 
-#### :30093/login [3003:30093]
+#### :31380/loginsvc/login [3003:31380]
 
 Description: *Login Microservice* Logs in to the app
 
-Method: GET
+Method: POST
 
-#### :30094/signup [3004:30094]
+```JavaScript
+{
+  email: String,
+  password: String,
+}
+```
+
+#### :31380/loginsvc/createUser [3003:31380]
 
 Description: *Sign Microservice* Signsup in to the api
 
@@ -34,7 +37,7 @@ Example input:
 }
 ```
 
-#### :30090/book [3000:30090]
+#### :31380/bookingsvc/book [3000:31380]
 
 Description: *Booking Microservice* Book for a flight
 
@@ -55,20 +58,20 @@ Example input:
 }
 ```
 
-#### :30090/listBookingByUser/:id [3000:30090]
+#### :31380/listingsvc/listBookingByUser/:id [3000:31380]
 
 Description: *Booking Microservice* Search all flights by its ID
 
 Method: GET
 
-#### :30091/checkin/:bookid/:userid [3001:30091]
+#### :31380/bookingsvc/checkin/:bookid/:userid [3001:31380]
 
 Description: *Checkin Microservice* Checkin to a flight
 
 Method: GET
 
 
-#### :30092/listFlights [3002:30092]
+#### :31380/listingsvc/listFlights [3002:31380]
 
 Description: *Listing Microservice* Search flights by queries
 
@@ -78,21 +81,21 @@ Example input:
 
 ```JavaScript
 {
-  Year: Integer,
-  Month: Integer,
+  Year: String,
+  Month: String,
   DayofMonth: String,
   Origin: String,
   Dest: String
 }
 ```
 
-#### :30092/listFlightsByID/:id [3002:30092]
+#### :31380/listingsvc/listFlightsByID/:id [3002:31380]
 
 Description: *Listing Microservice* Get Booked flights by Id
 
 Method: Get
 
-#### :30989/postEmail [4000:30989]
+#### :31380/emailsvc/postEmail [4000:31380]
 
 Description: *Celery Microservice* Post Emails
 
@@ -102,31 +105,12 @@ Example input:
 
 ```JavaScript
 {
-  toemail: Integer,
-  src: Integer,
+  toemail: String,
+  src: String,
   dest: String
 ```
 
-#### :30989/setBlockchain [3008:30089]
-
-Description: *Ethereum Microservice* Post data on blockchain
-
-Method: POST
-
-Example input:
-
-```JavaScript
-{
-  data: String
-```
-
-#### :30989/getBlockchain [3008:30089]
-
-Description: *Ethereum Microservice* Get data on blockchain
-
-Method: GET
-
-#### :30989/odm [3005:30095]
+#### :31380/odmsvc/odm [4000:31380]
 
 Description: *ODM Microservice* Queries ODM
 
@@ -143,4 +127,3 @@ Example input:
   milesBalance: String
 }
 ```
-

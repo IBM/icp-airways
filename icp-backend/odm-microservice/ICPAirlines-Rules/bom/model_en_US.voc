@@ -1,0 +1,33 @@
+# Vocabulary Properties
+uuid = cebec6a4-4d4e-4aeb-920e-975ab033aa0e
+
+# com.icpairlines.rules.Booking
+com.icpairlines.rules.Booking#concept.label = booking
+com.icpairlines.rules.Booking.addMessage(java.lang.String)#phrase.action = add {0} to the messages of {this}
+com.icpairlines.rules.Booking.addPriceOption(java.lang.String,double)#phrase.action = add a {0} pricing option to {this} with cost {1} 
+com.icpairlines.rules.Booking.addUpgradeOffer(java.lang.String,double)#phrase.action = add a {0} upgrade option to {this} with cost {1} 
+com.icpairlines.rules.Booking.customerName#phrase.action = set the customer name of {this} to {customer name}
+com.icpairlines.rules.Booking.customerName#phrase.navigation = {customer name} of {this}
+com.icpairlines.rules.Booking.customerTier#phrase.action = set the customer tier of {this} to {customer tier}
+com.icpairlines.rules.Booking.customerTier#phrase.navigation = {customer tier} of {this}
+com.icpairlines.rules.Booking.date#phrase.action = set the date of {this} to {date}
+com.icpairlines.rules.Booking.date#phrase.navigation = {date} of {this}
+com.icpairlines.rules.Booking.dstAirport#phrase.action = set the destination of {this} to {destination}
+com.icpairlines.rules.Booking.dstAirport#phrase.navigation = {destination} of {this}
+com.icpairlines.rules.Booking.messages#phrase.navigation = {message} of {this}
+com.icpairlines.rules.Booking.milesBalance#phrase.action = set the miles balance of {this} to {miles balance}
+com.icpairlines.rules.Booking.milesBalance#phrase.navigation = {miles balance} of {this}
+com.icpairlines.rules.Booking.offers#phrase.navigation = {offer} of {this}
+com.icpairlines.rules.Booking.srcAirport#phrase.action = set the origin airport of {this} to {origin}
+com.icpairlines.rules.Booking.srcAirport#phrase.navigation = {origin} of {this}
+
+# com.icpairlines.rules.Offer
+com.icpairlines.rules.Offer#concept.label = offer
+com.icpairlines.rules.Offer.cost#phrase.action = set the cost of {this} to {cost}
+com.icpairlines.rules.Offer.cost#phrase.navigation = {cost} of {this}
+com.icpairlines.rules.Offer.offerName#phrase.action = set the offer name of {this} to {offer name}
+com.icpairlines.rules.Offer.offerName#phrase.navigation = {offer name} of {this}
+com.icpairlines.rules.Offer.offerType#phrase.action = set the offer type of {this} to {offer type}
+com.icpairlines.rules.Offer.offerType#phrase.navigation = {offer type} of {this}
+com.icpairlines.rules.Offer.selected#phrase.action = make it {selected} that {this} is selected
+com.icpairlines.rules.Offer.selected#phrase.navigation = {this} is selected

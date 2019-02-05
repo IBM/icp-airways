@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.dt:DecisionTable xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.dt="http://ilog.rules.studio/model/dt.ecore">
+  <name>PricingTable</name>
+  <uuid>82a7ea22-0a54-40f4-a4a3-a2f01327d112</uuid>
+  <locale>en_US</locale>
+  <definition><DT xmlns="http://schemas.ilog.com/Rules/7.0/DecisionTable">
+    <Body>
+    <Structure>
+      <ConditionDefinitions>
+        <ConditionDefinition Id="C0">
+          <ExpressionDefinition>
+            <Text><![CDATA[the origin of 'the flight booking' is <a string>]]></Text>
+          </ExpressionDefinition>
+        </ConditionDefinition>
+        <ConditionDefinition Id="C1">
+          <ExpressionDefinition>
+            <Text><![CDATA[the destination of 'the flight booking' is <a string>]]></Text>
+          </ExpressionDefinition>
+        </ConditionDefinition>
+        <ConditionDefinition Id="C2">
+          <ExpressionDefinition>
+            <Text><![CDATA[the miles balance of 'the flight booking' is more than<a number>]]></Text>
+          </ExpressionDefinition>
+        </ConditionDefinition>
+      </ConditionDefinitions>
+      <ActionDefinitions>
+        <ActionDefinition Id="A0">
+          <ExpressionDefinition>
+            <Text><![CDATA[add a <a string>  pricing option to 'the flight booking'  with cost <a number>]]></Text>
+          </ExpressionDefinition>
+        </ActionDefinition>
+      </ActionDefinitions>
+    </Structure>
+    <Contents>
+      <Partition DefId="C0">
+        <Condition>
+          <Expression>
+            <Param><![CDATA["DXB"]]></Param>
+          </Expression>
+          <Partition DefId="C1">
+            <Condition>
+              <Expression>
+                <Param><![CDATA["CAI"]]></Param>
+              </Expression>
+              <Partition DefId="C2">
+                <Condition>
+                  <Expression>
+                    <Param/>
+                  </Expression>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression>
+                        <Param><![CDATA["Cash"]]></Param>
+                        <Param><![CDATA[1500]]></Param>
+                      </Expression>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+                <Condition>
+                  <Expression>
+                    <Text><![CDATA[<a number> is at least <a number>]]></Text>
+                    <Param><![CDATA[30000]]></Param>
+                  </Expression>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression>
+                        <Param><![CDATA["Cash + 30 Thousand Miles"]]></Param>
+                        <Param><![CDATA[1000]]></Param>
+                      </Expression>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+                <Condition>
+                  <Expression>
+                    <Param><![CDATA[60000]]></Param>
+                  </Expression>
+                  <ActionSet>
+                    <Action DefId="A0">
+                      <Expression>
+                        <Param><![CDATA["Cash + 60 Thousand Miles"]]></Param>
+                        <Param><![CDATA[500]]></Param>
+                      </Expression>
+                    </Action>
+                  </ActionSet>
+                </Condition>
+              </Partition>
+            </Condition>
+          </Partition>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+        <Condition>
+          <Expression/>
+          <ActionSet>
+            <Action DefId="A0">
+              <Expression/>
+            </Action>
+          </ActionSet>
+        </Condition>
+      </Partition>
+    </Contents>
+  </Body>
+    <Resources DefaultLocale="en_US">
+    <ResourceSet Locale="en_US">
+      <Data Name="Definitions(A0)#HeaderText"><![CDATA[Price]]></Data>
+      <Data Name="Definitions(A0)#Width"><![CDATA[180]]></Data>
+      <Data Name="Definitions(A0)[0]#HeaderText"><![CDATA[Pricing Type]]></Data>
+      <Data Name="Definitions(C0)#HeaderText"><![CDATA[Origin airport]]></Data>
+      <Data Name="Definitions(C0)#Width"><![CDATA[183]]></Data>
+      <Data Name="Definitions(C1)#HeaderText"><![CDATA[Destination]]></Data>
+      <Data Name="Definitions(C1)#Width"><![CDATA[188]]></Data>
+      <Data Name="Definitions(C2)#HeaderText"><![CDATA[Miles Balance]]></Data>
+      <Data Name="Definitions(C2)#Width"><![CDATA[140]]></Data>
+    </ResourceSet>
+  </Resources>
+</DT></definition>
+</ilog.rules.studio.model.dt:DecisionTable>

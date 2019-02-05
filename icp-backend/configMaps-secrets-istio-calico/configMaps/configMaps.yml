@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-database
+  namespace: default
+data:
+  NODE_ENV: development
+  DATABASE: SAMPLE
+  PORT: '50000'
+  HOSTNAME: 'icpairways-ibm-db2oltp-dev-db2.default'
+  PROTOCOL: TCPIP
+  ODM: 'http://icpairwaysodm-ibm-odm-dev.default:9060/DecisionService/rest/ICPAirlinesRuleApp/FlightPricing'
+  CELERY_RESULT_BACKEND: 'amqp://admin:admin@icpairwaysrabbitmq-ibm-rabbitmq-dev.default:5671'
+  CELERY_BROKER_URL: 'amqp://admin:admin@icpairwaysrabbitmq-ibm-rabbitmq-dev.default:5671'
+  EMAILAPI: 'http://emailsvc.default:3006/email'
+  MONGOPORT: '27017'
+  HOSTNAMEMARIADB: 'icpairwayd-ibm-db2oltp-dev-db2.default'
+  HOSTNAMEMONGODB: 'icpairwaymongo-ibm-mongodb-dev.default'
+  DATABASEMARIADB: 'SAMPLE'
+  PROTOCOLMARIADB: 'TCPIP'
+  PORTMARIADB: '50000'
+  APPID: '%20DnIcLahkKeaggpaelctV'
+  APPCODE: '%20qAcrILPYo5JmKS98X_GCoA'
+  APIKEY: 'z7sGR_nRkuBWvYHMLKpdTGHy5F3hXWvw60UsZRlYPts5'
+  ASSISTANTID: '8f87912c-35a1-4b74-9914-6508430f56fa'

@@ -5,6 +5,5 @@ import { NgModule} from '@angular/core'
     declarations: [ TimeRefactorPipe, CountryRefactorPipe ],
     exports: [ TimeRefactorPipe, CountryRefactorPipe ]
 })
-export class SharedModule{
-    
+export class SharedModule { 
 }

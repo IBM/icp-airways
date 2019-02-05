@@ -1,0 +1,16 @@
+# The IBM version of this configuration
+version : 0.0.3
+
+container-name-run : "login-microservice-run"
+
+
+host-path-run : .
+host-path-tools : .
+
+dockerfile-run : "Dockerfile"
+
+image-name-run : "login-microservice-run"
+
+chart-path: "chart/login-microservice"
+deploy-target: "container"
+deploy-image-target: "mycluster.icp:8500/default/login-microservice:0.0.1"

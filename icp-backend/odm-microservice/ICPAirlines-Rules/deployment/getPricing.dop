@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.rules.studio.model.decisionservice:Operation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.rules.studio.model.decisionservice="http://com.ibm.rules.studio/model/decisionservice.ecore" xmlns:ilog.rules.studio.model.query.extractor="http://ilog.rules.studio/model/query/extractor.ecore" rulesetName="FlightPricing" usingRuleflow="true" ruleflowName="BookingRuleFlow" usingExtractor="true">
+  <name>getPricing</name>
+  <uuid>104870e9-26e3-4b75-9597-e539ba3184f8</uuid>
+  <referencedVariables variableName="flightBooking" variableSetName="flightBooking" direction="IN_OUT">
+    <variableSet href="../rules/FlightBooking.var#eeecbfad-a45c-4368-9b94-5d51285a301d"/>
+  </referencedVariables>
+  <ruleflow href="../rules/BookingRuleFlow.rfl#44d4eeaa-29ce-4369-a07f-f68aef5df70d"/>
+  <extractor xsi:type="ilog.rules.studio.model.query.extractor:QueryExtractor" name="getPricing_extractor" validator="Default Validator"/>
+  <targetRuleProject href="../../ICPAirlines-Rules#01014504-80f3-452e-b3c7-a1e935b22c04"/>
+</com.ibm.rules.studio.model.decisionservice:Operation>

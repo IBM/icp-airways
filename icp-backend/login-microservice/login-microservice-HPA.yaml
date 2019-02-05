@@ -1,0 +1,20 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: login-microservice-HPA
+spec:
+  maxReplicas: 10
+  minReplicas: 2                       
+  metrics:    
+  - type: Pods
+    pods:
+      metricName: http_requests
+      targetAverageValue: 20                          
+  - type: Resource
+    resource:                              
+      name: cpu                            
+      targetAverageUtilization: 80        
+  scaleTargetRef:                          
+    apiVersion: extensions/v1beta1         
+    kind: Deployment                       
+    name: loginsvc

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
  name: odmsvc 
 spec:
- replicas: 3
+ replicas: 1
  template:
    metadata:
      name: odmsvc
@@ -14,12 +14,24 @@ spec:
        - name: odmsvc
          image: "mycluster.icp:8500/default/odm-microservice:latest" 
          imagePullPolicy: Always
+         resources:
+          requests:
+            cpu: "250m"
+            memory: "64Mi"
+          limits:
+            cpu: "1"
+            memory: "128Mi"
          env:
           - name: ODM
             valueFrom:
               configMapKeyRef:
                 name: env-database
                 key: ODM
+          - name: SECRET
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: SECRET
          ports:
          - containerPort: 3005
 ---

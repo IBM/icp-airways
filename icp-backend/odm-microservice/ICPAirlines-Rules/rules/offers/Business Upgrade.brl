@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.brl:ActionRule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.brl="http://ilog.rules.studio/model/brl.ecore">
+  <name>Business Upgrade</name>
+  <uuid>e4f650b0-a306-4619-8a8b-cdcd39ee1241</uuid>
+  <locale>en_US</locale>
+  <definition><![CDATA[if the customer tier of 'the flight booking' is one of { "SILVER","GOLD"} 
+then add a "Business Class" upgrade option to 'the flight booking' with cost 500; ]]></definition>
+</ilog.rules.studio.model.brl:ActionRule>

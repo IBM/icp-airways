@@ -1,0 +1,30 @@
+// /* You can add global styles to this file, and also import other style files */
+// @import '~@nebular/bootstrap/styles/globals';
+// @import '~@nebular/bootstrap/styles/globals';
+// @include nb-install() {
+//   @include nb-bootstrap-global();
+// }
+// // this is your created themes.scss file, make sure the path to the file is correct
+// // @import 'themes';
+
+// // framework component styles which will use your new theme
+// // @import '~@nebular/theme/styles/globals';
+
+// // // install the framework
+// // @include nb-install() {
+// //   @include nb-theme-global();
+// // };
+// @import 'themes';
+
+// // framework component styles which will use your new theme
+// @import '~@nebular/theme/styles/globals';
+
+// // install the framework
+// @include nb-install() {
+//   @include nb-theme-global();
+// };
+// body,
+// html {
+//   background-color: white;
+//   height: 100%;
+// }

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <img src="../assets/ibm.png" alt="ibm" height="20" width="40">
+      </button>
+    </ion-buttons>
+    <ion-title color="primary">Checkin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="masters">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ng-container *ngFor="let listshow of show">
+    <ng-container *ngIf="listshow.flight">
+        <ion-fab right top >
+            <button ion-fab>
+              <ion-icon name="ios-checkmark-circle"></ion-icon>
+            </button>
+          </ion-fab>
+      <ion-card class="card-5">
+
+        <ion-item>
+          <ion-icon name="logo-buffer" item-start large color="tab"></ion-icon>
+          <h2>Flight Number</h2>
+          <p>#{{listshow.flight._id}}</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="plane" item-start large color="tab"></ion-icon>
+          <h2>From</h2>
+          <p>{{listshow.flight.Origin | isoToCountryName }}</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="plane" item-start large color="tab"></ion-icon>
+          <h2>To</h2>
+          <p>{{listshow.flight.Dest | isoToCountryName }}</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="time" item-start large color="tab"></ion-icon>
+          <h2>Arrival Time</h2>
+          <p>{{listshow.flight.ArrTime | timeRefactor}}</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="time" item-start large color="tab"></ion-icon>
+          <h2>Departure Time</h2>
+          <p>{{listshow.flight.DepTime | timeRefactor}}</p>
+        </ion-item>
+        <ion-item *ngIf="listshow.Checkin === '0'">
+          <button ion-button block outline color="tab" (click)="checkin(listshow.BookingID,provider.userData.data.USERID)">CHECKIN</button>
+        </ion-item>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+</ion-content>
+
+<ion-footer no-border>
+
+  <footer>
+    <p class="copyright">© IBM 2019 </p>
+</footer>
+
+</ion-footer>

@@ -1,0 +1,34 @@
+
+property loadGetterSetterAsProperties "true"
+property origin "xom:/ICPAirlines-Rules//ICPAirlines-xom"
+property uuid "17f506ca-86ff-48b5-a54f-ab1d8568e019"
+package com.icpairlines.rules;
+
+
+public class Booking
+{
+    public string customerName;
+    public string customerTier;
+    public java.util.Date date;
+    public string dstAirport;
+    public readonly java.util.ArrayList messages domain 0,* class string
+                property "factory.ignore" "true";
+    public int milesBalance;
+    public readonly java.util.ArrayList offers domain 0,* class com.icpairlines.rules.Offer;
+    public string srcAirport;
+    public Booking();
+    public void addMessage(string arg);
+    public void addPriceOption(string arg1, double arg2);
+    public void addUpgradeOffer(string arg1, double arg2);
+    public void clearMessages();
+}
+
+public class Offer
+{
+    public double cost;
+    public string offerName;
+    public string offerType;
+    public boolean selected;
+    public Offer();
+}
+

@@ -1,0 +1,107 @@
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: angularpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 80
+  - from:
+    - podSelector:
+        matchLabels:
+          istio: ingress
+  podSelector:
+    matchLabels:
+      app: angular
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: listingsvcpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 7000
+  - from:
+    - podSelector:
+        matchLabels:
+          istio: ingress
+  podSelector:
+    matchLabels:
+      app: listingsvc
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: bookingsvcpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 3000
+  - from:
+    - podSelector:
+        matchLabels:
+          istio: ingress
+  podSelector:
+    matchLabels:
+      app: bookingsvc
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: loginsvcpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 3003
+  - from:
+    - podSelector:
+        matchLabels:
+          istio: ingress
+  podSelector:
+    matchLabels:
+      app: loginsvc
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: celerysvcpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 4000
+  - from:
+    - podSelector:
+        matchLabels:
+          istio: ingress
+  podSelector:
+    matchLabels:
+      app: celerysvc
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: mapsvcpolicy
+  namespace: default
+spec:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 3016
+  - from:
+    - podSelector:
+        matchLabels:
+          istio: ingress
+  podSelector:
+    matchLabels:
+      app: mapsvc

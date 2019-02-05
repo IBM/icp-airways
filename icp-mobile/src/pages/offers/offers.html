@@ -1,0 +1,118 @@
+<!--
+  Generated template for the OffersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <img src="../assets/ibm.png" alt="ibm" height="20" width="40">
+      </button>
+    </ion-buttons>
+    <ion-title color="primary">Offers</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="danger" (click)="cancel()">
+        CANCEL
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item-divider color="light">Select Pricing</ion-item-divider>
+  <ion-list radio-group [(ngModel)]="pricing">
+    <ng-container *ngIf="values">
+      <ng-container *ngFor="let listshow of values.data">
+    <ion-item *ngIf="listshow.offerType === 'Pricing' ">
+      <ion-label>
+        <h3>
+          <ion-icon name="information-circle" item-start></ion-icon>
+          {{listshow.offerName}}
+        </h3>
+        <h3>
+          <ion-icon name="cash" item-start></ion-icon>
+          {{listshow.cost}} DHS
+        </h3>
+      </ion-label>
+      <ion-radio value= "{{listshow.offerName}},{{listshow.cost}}"></ion-radio>
+    </ion-item>
+    </ng-container>
+    </ng-container>
+  </ion-list>
+  <ion-item-divider color="light">Select Upgrades</ion-item-divider>
+  <ion-list radio-group [(ngModel)]="upgrades">
+      <ng-container *ngIf="values">
+          <ng-container *ngFor="let listshow of values.data">
+        <ion-item *ngIf="listshow.offerType === 'Upgrade' ">
+          <ion-label>
+            <h3>
+              <ion-icon name="home" item-start *ngIf="listshow.offerName === 'Hotel' "></ion-icon>
+              <ion-icon name="plane" item-start *ngIf="listshow.offerName === 'Air transporation' "></ion-icon>
+              <ion-icon name="star" item-start *ngIf="listshow.offerName === 'Business Class' "></ion-icon>
+              {{listshow.offerName}}
+            </h3>
+            <h3>
+              <ion-icon name="cash" item-start></ion-icon>
+              {{listshow.cost}} DHS
+            </h3>
+          </ion-label>
+          <ion-radio value= "{{listshow.offerName}},{{listshow.cost}}"></ion-radio>
+        </ion-item>
+        </ng-container>
+        </ng-container>
+    <!-- <ion-item>
+      <ion-label>
+        <h3>
+          <ion-icon name="home" item-start></ion-icon>
+          Hotel
+        </h3>
+        <h3>
+          <ion-icon name="cash" item-start></ion-icon>
+          1000 DHS
+        </h3>
+      </ion-label>
+      <ion-radio value="friends" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-icon name="plane" item-start></ion-icon>
+          Air Transportation
+        </h3>
+        <h3>
+          <ion-icon name="cash" item-start></ion-icon>
+          900 DHS
+        </h3>
+      </ion-label>
+      <ion-radio value="3"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-icon name="star" item-start></ion-icon>
+          Buisness Class
+        </h3>
+        <h3>
+          <ion-icon name="cash" item-start></ion-icon>
+          900 DHS
+        </h3>
+      </ion-label>
+      <ion-radio value="6"></ion-radio>
+    </ion-item> -->
+  </ion-list>
+        
+  <ion-item>
+      <button ion-button block outline color="tab" (click)="confirm()">BOOK</button>
+  </ion-item>
+</ion-content>
+
+<ion-footer no-border>
+
+  <footer>
+    <p class="copyright">© IBM 2019 </p>
+</footer>
+
+</ion-footer>

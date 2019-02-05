@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons start>
+        <button ion-button icon-only>
+          <img src="../assets/ibm.png" alt="ibm" height="20" width="40">
+        </button>
+      </ion-buttons>
+      <ion-title color="primary">Booking</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="masters">
+    <ion-list no-line>
+      <ion-item>
+        <ion-label>Select Source</ion-label>
+        <ion-select [(ngModel)]="origin">
+          <ion-option value="DXB">Dubai</ion-option>
+          <ion-option value="CAI">Cairo</ion-option>
+          <ion-option value="IND">India</ion-option>
+          <ion-option value="BWI">Washington</ion-option>
+          <ion-option value="MAD">Madrid</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Select Destination </ion-label>
+        <ion-select [(ngModel)]="dest">
+          <ion-option value="DXB">Dubai</ion-option>
+          <ion-option value="CAI">Cairo</ion-option>
+          <ion-option value="IND">India</ion-option>
+          <ion-option value="BWI">Washington</ion-option>
+          <ion-option value="MAD">Madrid</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Travel Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="date"></ion-datetime>
+      </ion-item>
+    </ion-list>
+    <button ion-button block outline color="tab" (click)="search()">Search</button>
+  
+  </ion-content>
+  
+
+  <ion-footer no-border>
+
+    <footer>
+      <p class="copyright">© IBM 2019 </p>
+  </footer>
+  
+  </ion-footer>

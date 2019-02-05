@@ -1,0 +1,53 @@
+replicaCount: 1
+
+metadata:
+ name: ionic 
+ label: ionic
+
+hpa:
+  metadata:
+    name: ionicehpa
+  spec:
+    maxReplicas: 10
+    minReplicas: 1
+  metrics:
+    pods:
+      targetAverageValue: 50
+    resource:
+      name: cpu
+      targetAverageUtilization: 50
+    memory:
+      targetAverageUtilization: 50
+  scaleTargetRef:  
+    name: ionic
+
+image:
+  name: ionic
+  imageName: "mycluster.icp:8500/default/ionic:0.0.1" 
+  imagePullPolicy: Always
+  maxSurge: 1
+  maxUnavailable: 0
+  requests:
+    cpu: "400m"
+    memory: "800Mi"
+  limits:
+    cpu: "900m"
+    memory: "1000Mi"
+
+ingress:
+  metadeta:
+    name: ionic
+  path: /
+  serviceName: ionic
+  servicePort: 80
+
+service:
+  serviceMetadata:
+    name: ionic
+  selector:
+    selectorName: ionic
+  servicePortConfiguration:
+    name: ionic
+    type: ClusterIP
+    port: 80
+    targetPort: 80

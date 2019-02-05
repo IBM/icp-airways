@@ -1,0 +1,46 @@
+version : 0.0.3
+
+container-name-run : "listing-mongo-microservice-run"
+
+# The project root on the host for the run container to mount to container-path-run
+host-path-run : .
+# The project root on the host for the tools container to mount to container-path-tools
+host-path-tools : .
+
+# The project root in the run container to mount to host-path-run
+container-path-run : "/app"
+# The project root in the tools container that will be mounted to host-path-tools
+container-path-tools : "/app"
+
+# The list of additional mounts between the host and the run container in the form [host_path:container_path]
+container-mounts-run:
+   - "./node_modules_linux": "/app/node_modules"
+# The list of additional mounts between the host and the tools container in the form [host_path:container_path]
+container-mounts-tools:
+   - "./node_modules_linux": "/app/node_modules"
+
+# The port mappings between the host and the container in the form [host:container]
+container-port-map : "3600:3600"
+
+# The name for the dockerfile for the run container
+dockerfile-run : "Dockerfile"
+
+
+# The name of image to create from dockerfile-run
+image-name-run : "listing-mongo-microservice-run"
+
+
+# The command to build the code and docker image for RUN
+build-cmd-run : "npm install"
+# The command to build the code and docker image for DEBUG
+
+# The command to run the code in the run container
+run-cmd : ""
+# The command to execute debug of the code in the tools container
+# The command to stop the code
+stop-cmd : "npm stop"
+
+# The relative path to the helm chart used for Kubernetes deployment
+chart-path: "chart/listing-mongo-microservice"
+deploy-target: "container"
+deploy-image-target: "mycluster.icp:8500/default/listing-mongo-microservice"

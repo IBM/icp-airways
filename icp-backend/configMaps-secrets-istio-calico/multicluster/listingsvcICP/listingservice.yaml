@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: listingsvc
+  labels:
+    app: listingsvc
+spec:
+  ports:
+  - port: 80
+    targetPort: 7000
+    name: http
+  selector:
+    app: listingsvc

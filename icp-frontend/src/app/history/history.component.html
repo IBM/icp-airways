@@ -27,6 +27,10 @@
             <i class="material-icons white-text">flight</i>Browse Flights</a>
         </li>
         <li>
+          <a routerLink="/shop" class="waves-effect waves-red white-text">
+            <i class="material-icons white-text">shopping_cart</i>shop</a>
+        </li>
+        <li>
           <a class="waves-effect waves-red white-text" >
             <i class="material-icons white-text" (click)="test()">exit_to_app</i>Logout</a>
         </li>
@@ -132,7 +136,7 @@
 
         <!-- TABLE TO POPULATE WITH FLIGHT DATA :) -->
         <!-- *ngIf="show" -->
-        <ng-container *ngIf="show && provider.rawData">
+        <ng-container *ngIf="show">
           <div id="my_table" >
             <table>
               <thead>
@@ -146,35 +150,38 @@
                 </tr>
               </thead>
             </table>
-            <ng-container *ngFor="let listshow of show.data">
+            <ng-container *ngFor="let listshow of show">
+                <ng-container *ngIf="listshow.flight">
+
               <div class="card row flight-info">
                 <div class="col s3">
-                  <p>{{listshow.ORIGIN | isoToCountryName }}</p>
+                  <p>{{listshow.flight.Origin | isoToCountryName }}</p>
                 </div>
                 <div class="col s3">
-                  <p>{{listshow.DEST | isoToCountryName }}</p>
+                  <p>{{listshow.flight.Dest | isoToCountryName }}</p>
                 </div>
                 <!-- <div class="col s3">
                   <p>{{listshow.TAILNUM}}</p>
                 </div> -->
                 <div class="col s3">
-                  <p>{{listshow.DEPTIME | timeRefactor}}</p>
+                  <p>{{listshow.flight.DepTime | timeRefactor}}</p>
                 </div>
                 <div class="col s3">
-                  <p>{{listshow.ARRTIME | timeRefactor}}</p>
+                  <p>{{listshow.flight.ArrTime | timeRefactor}}</p>
                 </div>
-                <ng-container *ngIf="listshow.CHECKIN === '0'">
+                <ng-container *ngIf="listshow.Checkin === '0'">
                   <div class="col s3">
-                    <button type='submit' id='btn_book' name='btn_login' class='btn waves-effect colour-pink' (click)="checkin(listshow.FLIGHTID,listshow.USERID,listshow.ORIGIN ,listshow.DEST )">CHECKIN</button>
+                    <button type='submit' id='btn_book' name='btn_login' class='btn waves-effect colour-pink' (click)="checkin(listshow.BookingID,provider.userData.data.USERID,listshow.flight.Origin ,listshow.flight.Dest )">CHECKIN</button>
                   </div>
                 </ng-container>
 
-                <ng-container *ngIf="listshow.CHECKIN === '1'">
+                <ng-container *ngIf="listshow.Checkin === '1'">
                   <div class="col s3">
                     <button type='submit' id='btn_book' name='btn_login' class='btn waves-effect colour-pink' disabled="disabled">CHECKIN</button>
                   </div>
                 </ng-container>
               </div>
+              </ng-container>
             </ng-container>
           </div>
         </ng-container>

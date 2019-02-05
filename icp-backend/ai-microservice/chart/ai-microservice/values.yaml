@@ -1,0 +1,79 @@
+replicaCount: 2
+
+metadata:
+ name: aisvc 
+ label: aisvc
+
+readinessProbe:
+  path: /healthz
+  port: 3011
+  initialDelaySeconds: 10
+  timeoutSeconds: 2
+  periodSeconds: 10
+
+livenessProbe:
+  path: /healthz
+  port: 3011
+  initialDelaySeconds: 10
+  timeoutSeconds: 2
+  periodSeconds: 10
+image:
+  name: aisvc
+  imageName: "mycluster.icp:8500/default/ai-microservice:0.0.1" 
+  imagePullPolicy: Always
+  ports:
+    containerPort: 3011
+  requests:
+    cpu: "50m"
+    memory: "300Mi"
+  limits:
+    cpu: "100m"
+    memory: "400Mi"
+  maxSurge: 1
+  maxUnavailable: 0
+  lifecycle:
+    preStop:
+      command: ["/bin/bash", "-c", "sleep 20"]
+      
+hpa:
+  metadata:
+    name: aisvcmicroservicehpa
+  spec:
+    maxReplicas: 10
+    minReplicas: 2
+  metrics:
+    pods:
+      targetAverageValue: 30
+    resource:
+      name: cpu
+      targetAverageUtilization: 70
+    memory:
+      targetAverageUtilization: 70
+  scaleTargetRef:  
+    name: aisvc
+
+envOfConfigmaps:
+  envASSISTANTID:
+    name: ASSISTANTID
+    configMapKeyRef:
+      name: env-database
+      key: ASSISTANTID
+  envAPIKEY:
+    name: APIKEY
+    configMapKeyRef:
+      name: env-database
+      key: APIKEY
+
+service:
+  serviceMetadata:
+    name: aisvc
+    labels:
+      app: aisvc
+  selector:
+    selectorName: aisvc
+  servicePortConfiguration:
+    protocol: TCP
+    name: aisvc
+    type: ClusterIP
+    port: 3011
+    targetPort: 3011

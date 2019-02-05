@@ -7,7 +7,6 @@ import { BookingService } from '../services/booking-service/booking.component.se
 import * as jwtDecode from 'jwt-decode';
 import 'rxjs/Rx';
 import { EthereumService } from '../services/ethereum-service/ethereum.component.service';
-import {MaterializeAction} from 'angular2-materialize';
 import { Headers, Http, RequestOptions, Response } from "@angular/http";
 
 @Component({
@@ -17,7 +16,6 @@ import { Headers, Http, RequestOptions, Response } from "@angular/http";
   animations: [flightTrigger]
 })
 export class HomeComponent implements OnInit {
-  modalActions = new EventEmitter<string|MaterializeAction>();
   public modalData:any;
   public milestone: any;
   public band: any;
@@ -161,7 +159,7 @@ export class HomeComponent implements OnInit {
         data => {
           console.log(data);
           this.modalData = data;
-          this.modalActions.emit({action:"modal",params:['open']});
+          // this.modalActions.emit({action:"modal",params:['open']});
         },
         error => {
           console.log(error);
@@ -169,24 +167,26 @@ export class HomeComponent implements OnInit {
     }
   }
   closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
+    // this.modalActions.emit({action:"modal",params:['close']});
   }
   book(id) {
+      console.log(this.provider.userData.data.USERID, id)
     this.loading = true
     this.bookingService
-    .booking(this.provider.userData.data.USERID, id,this.offerNamePricing,this.offerTypePricing,this.costPricing,this.offerNameUpgrade,this.offerTypeUpgrade,this.costUpgrade)
+    // .booking(this.provider.userData.data.USERID, id,this.offerNamePricing,this.offerTypePricing,this.costPricing,this.offerNameUpgrade,this.offerTypeUpgrade,this.costUpgrade)
+    .booking(this.provider.userData.data.USERID, id,'','','','','','')
     .subscribe(
       data => {
-        this.loading = false
+        this.loading = false;
         console.log('booked flight', data);
-        this.modalActions.emit({action:"modal",params:['close']});
-        this.show = data;
+        // this.modalActions.emit({action:"modal",params:['close']});
+        this.show = [];
       },
       error => {
         this.loading = false
-        this.modalActions.emit({action:"modal",params:['close']});
+        // this.modalActions.emit({action:"modal",params:['close']});
         console.log(error);
-      })
+      });
     // this.ethereumService.getBlockchain().subscribe((data) => {
     //   var temp = true;
     //   for (var i = 0; i < data.length; i++) {
@@ -232,5 +232,5 @@ export class HomeComponent implements OnInit {
     //   this.loading = false
     //     alert("cant get data from blockchain")
     //   });
-    }   
+    }
 }

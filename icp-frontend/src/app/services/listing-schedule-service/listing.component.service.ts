@@ -21,9 +21,9 @@ export class ListingService {
         const bodyObject = {
             Year:Year,
             Month:Month,
-            DayofMonth:DayOfMonth,
-            Origin:Origin,
-            Dest:Dest
+            DayOfMonth:DayOfMonth,
+            origin:Origin,
+            dest:Dest
         }
         const bodyString = JSON.stringify(bodyObject); // Stringify payload
         return this.http.post(link, bodyObject, options) // ...using post request

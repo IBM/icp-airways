@@ -1,0 +1,92 @@
+<!--
+  Generated template for the ChatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <img src="../assets/ibm.png" alt="ibm" height="20" width="40">
+      </button>
+    </ion-buttons>
+    <ion-title color="primary">Help</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="message-wrap" *ngFor="let show of message">
+    
+
+    <div class="sender" *ngIf="show.user==='watson'">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2 text-left>
+            <img class="friend-img" src="../assets/watson_logo.gif" alt="">
+          </ion-col>
+          <ion-col col-10>
+            <p>{{show.message}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="me" *ngIf="show.user==='human'">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <p>{{show.message}}</p>
+          </ion-col>
+          <ion-col col-2>
+            <img class="friend-img" src="../assets/avatar.png" alt="">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </div>
+  <div class="me" *ngIf="type">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <p>Typing ...</p>
+          </ion-col>
+          <ion-col col-2>
+            <img class="friend-img" src="../assets/typing.gif" alt="">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="sender" *ngIf="watsontype">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-2 text-left>
+              <img class="friend-img" src="../assets/typing.gif" alt="">
+            </ion-col>
+            <ion-col col-10>
+              <p>Watson is typing...</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+</ion-content>
+
+
+<ion-footer no-border>
+  <ion-toolbar color="facebook">
+    <ion-textarea (keyup.enter)="doSend()" [(ngModel)]="input" placeholder="Enter your message" name="message" (ngModelChange)="typing($event)"></ion-textarea>
+    <ion-buttons end>
+      <button (click)="doSend()" ion-button icon-only>
+        <ion-icon name="send" color="light"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <footer>
+    <p class="copyright">© IBM 2019 </p>
+</footer>
+
+</ion-footer>

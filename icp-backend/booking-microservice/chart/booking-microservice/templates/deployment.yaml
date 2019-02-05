@@ -1,0 +1,88 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: {{ .Values.metadata.name }} 
+spec:
+ replicas: {{ .Values.replicaCount }}
+ strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: {{ .Values.image.maxSurge }} 
+    maxUnavailable: {{ .Values.image.maxUnavailable }} 
+ template:
+   metadata:
+     annotations:
+       sidecar.istio.io/inject: "true"
+     name: {{ .Values.metadata.name }} 
+     labels:
+       app: {{ .Values.metadata.label }} 
+   spec:
+     containers:
+       - name: {{ .Values.image.name }} 
+         image: {{ .Values.image.imageName }} 
+         readinessProbe:
+          httpGet: 
+            path: {{ .Values.readinessProbe.path }} 
+            port: {{ .Values.readinessProbe.port }} 
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }} 
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }} 
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }} 
+         livenessProbe:
+          httpGet:
+            path: {{ .Values.livenessProbe.path }} 
+            port: {{ .Values.livenessProbe.port }} 
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }} 
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }} 
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }} 
+         imagePullPolicy: {{ .Values.image.imagePullPolicy }} 
+         lifecycle:
+          preStop:
+            exec:
+              command: {{ .Values.image.lifecycle.preStop.command }} 
+         resources:
+          requests:
+            cpu: {{ .Values.image.requests.cpu }} 
+            memory: {{ .Values.image.requests.memory }} 
+          limits:
+            cpu: {{ .Values.image.limits.cpu }} 
+            memory: {{ .Values.image.limits.memory }} 
+         env:
+          - name: {{ .Values.envOfSecrets.envUID.name }} 
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.envOfSecrets.envUID.secretKeyRef.name }} 
+                key: {{ .Values.envOfSecrets.envUID.secretKeyRef.key }} 
+          - name: {{ .Values.envOfSecrets.envPASSWORD.name }} 
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.envOfSecrets.envPASSWORD.secretKeyRef.name }} 
+                key: {{ .Values.envOfSecrets.envPASSWORD.secretKeyRef.key }} 
+          - name: {{ .Values.envOfSecrets.envSECRET.name }} 
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.envOfSecrets.envSECRET.secretKeyRef.name }}
+                key: {{ .Values.envOfSecrets.envSECRET.secretKeyRef.key }}
+          - name: {{ .Values.envOfConfigmaps.envDATABASE.name }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envDATABASE.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envDATABASE.configMapKeyRef.key }}
+          - name: {{ .Values.envOfConfigmaps.envPORT.name }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envPORT.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envPORT.configMapKeyRef.key }}
+          - name: {{ .Values.envOfConfigmaps.envHOSTNAME.name }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envHOSTNAME.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envHOSTNAME.configMapKeyRef.key }}
+          - name: {{ .Values.envOfConfigmaps.envPROTOCOL.name }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envPROTOCOL.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envPROTOCOL.configMapKeyRef.key }}
+         ports:
+         - containerPort: {{ .Values.image.ports.containerPort }} 

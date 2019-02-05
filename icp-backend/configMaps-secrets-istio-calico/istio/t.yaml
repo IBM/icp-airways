@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: servicemeshfrontend
+spec:
+  gateways:
+  - gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: ''
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: ionic.default.svc.cluster.local
+        subset: ionic
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: destfrontend
+spec:
+  host: '*'
+  subsets:
+  - name: ionic
+    labels:
+      app: ionic

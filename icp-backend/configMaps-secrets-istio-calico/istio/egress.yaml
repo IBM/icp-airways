@@ -1,0 +1,51 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name:  heremap
+spec:
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+  hosts:
+  - reverse.geocoder.api.here.com
+  ports:
+  - number: 443
+    name: https
+    protocol: HTTPS
+  resolution: DNS
+  location: MESH_EXTERNAL
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: ServiceEntry
+# metadata:
+#   name:  sample
+# spec:
+#   hosts:
+#   - mapservice.test
+#   ports:
+#   - number: 80
+#     name: http
+#     protocol: HTTP
+#   resolution: STATIC
+#   endpoints:
+#   - address: 159.8.133.234
+#     ports:
+#       http: 80
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: a-virtual-service
+# spec:
+#   # Match all hosts ending in "svc.a.remotes"
+#   hosts:
+#   - "*"
+#   gateways:
+#   - mesh
+#   http:
+#   - route:
+#     - destination:
+#         host: ingress.a.remote
+#         port:
+#           number: 80
+#       weight: 100

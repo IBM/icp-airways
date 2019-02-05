@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: {{ .Values.metadata.name }} 
+spec:
+ replicas: {{ .Values.replicaCount }}
+ strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: {{ .Values.image.maxSurge }} 
+    maxUnavailable: {{ .Values.image.maxUnavailable }} 
+ template:
+   metadata:
+     annotations:
+       sidecar.istio.io/inject: "true"
+       traffic.sidecar.istio.io/excludeOutboundIPRanges: 0.0.0.0/0
+     name: {{ .Values.metadata.name }} 
+     labels:
+       app: {{ .Values.metadata.label }} 
+   spec:
+     containers:
+       - name: {{ .Values.image.name }} 
+         image: {{ .Values.image.imageName }} 
+         imagePullPolicy: {{ .Values.image.imagePullPolicy }} 
+         env:
+          - name: {{ .Values.envOfConfigmaps.envCELERY_RESULT_BACKEND.name }} 
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envCELERY_RESULT_BACKEND.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envCELERY_RESULT_BACKEND.configMapKeyRef.key }}
+          - name: {{ .Values.envOfConfigmaps.envCELERY_BROKER_URL.name }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envCELERY_BROKER_URL.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envCELERY_BROKER_URL.configMapKeyRef.key }}
+          - name: {{ .Values.envOfConfigmaps.envEMAILAPI.name }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.envOfConfigmaps.envEMAILAPI.configMapKeyRef.name }}
+                key: {{ .Values.envOfConfigmaps.envEMAILAPI.configMapKeyRef.key }}
+         ports:
+         - containerPort: {{ .Values.image.ports.containerPort }} 

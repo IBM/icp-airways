@@ -7,6 +7,7 @@ import * as passport from 'passport'
 import * as jwt from 'jsonwebtoken'
 import * as passportJWT from 'passport-jwt'
 import * as Request from 'request'
+import * as epimetheus from 'epimetheus'
 
 class App {
   public jwtOptions: any = {};
@@ -17,6 +18,7 @@ class App {
     this.jwtOptions.jwtFromRequest = this.ExtractJwt.fromAuthHeaderAsBearerToken();
     this.jwtOptions.secretOrKey = process.env.SECRET;
     this.express = express();
+    epimetheus.instrument(this.express)
     this.middleware();
     this.routes();
   }
@@ -34,7 +36,8 @@ class App {
   private middleware(): void {
     this.express.use(function (req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type,Content-Type, Access-Control-Allow-Headers, Authorization"); 
+      res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE"); 
       next();
     });
     this.express.use(logger('dev'));
@@ -53,19 +56,21 @@ class App {
           srcAirport: req.body.srcAirport,
           dstAirport: req.body.dstAirport,
           customerTier: req.body.customerTier,
-          customerName: req.body.customerName,
           milesBalance: req.body.milesBalance,
           offers: [],
           messages: []
         }
         })
-      }, (error, response, body) => {
-        if (error) {
-          return console.dir(error);
+      }, (err, response, body) => {
+        if (err) {
+          res.status(404).json({ err });
+          console.log(err);
         }
-        var a = JSON
         res.json(JSON.parse(body));
       });
+    });
+    router.get('/healthz', (req, res, next) => {
+      res.send('success');
     });
     this.express.use('/', router);
   }

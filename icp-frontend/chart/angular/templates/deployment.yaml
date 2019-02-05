@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.metadata.name }} 
+spec:
+  replicas: {{ .Values.replicaCount }} 
+  strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: {{ .Values.image.maxSurge }} 
+    maxUnavailable: {{ .Values.image.maxUnavailable }} 
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: {{ .Values.metadata.label }} 
+    spec:
+      containers:
+        - name: {{ .Values.metadata.name }} 
+          image: {{ .Values.image.imageName }} 
+          imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+          resources:
+            requests:
+              cpu: {{ .Values.image.requests.cpu }} 
+              memory: {{ .Values.image.requests.memory }} 
+            limits:
+              cpu: {{ .Values.image.limits.cpu }} 
+              memory: {{ .Values.image.limits.memory }}

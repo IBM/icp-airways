@@ -1,0 +1,128 @@
+replicaCount: 2
+
+metadata:
+ name: loginsvc 
+ label: loginsvc
+readinessProbe:
+  path: /healthz
+  port: 3003
+  initialDelaySeconds: 10
+  timeoutSeconds: 2
+  periodSeconds: 10
+
+livenessProbe:
+  path: /healthz
+  port: 3003
+  initialDelaySeconds: 10
+  timeoutSeconds: 2
+  periodSeconds: 10
+image:
+  name: loginsvc
+  imageName: "mycluster.icp:8500/icp-airways/login-microservice:0.0.1" 
+  imagePullPolicy: Always
+  ports:
+    containerPort: 3003
+  requests:
+    cpu: "50m"
+    memory: "15Mi"
+  limits:
+    cpu: "80m"
+    memory: "200Mi"
+  maxSurge: 1
+  maxUnavailable: 0
+  lifecycle:
+    preStop:
+      command: ["/bin/bash", "-c", "sleep 20"]
+  
+hpa:
+  metadata:
+    name: loginsvcmicroservicehpa
+  spec:
+    maxReplicas: 10
+    minReplicas: 2
+  metrics:
+    pods:
+      targetAverageValue: 30
+    resource:
+      name: cpu
+      targetAverageUtilization: 50
+    memory:
+      targetAverageUtilization: 50
+  scaleTargetRef:  
+    name: loginsvc
+
+envOfSecrets:
+  envUID:
+    name: UID
+    secretKeyRef:
+      name: mysecret
+      key: UID
+  envPASSWORD:
+    name: PASSWORD
+    secretKeyRef:
+      name: mysecret
+      key: PASSWORD
+  envSECRET:
+    name: SECRET
+    secretKeyRef:
+      name: mysecret
+      key: SECRET
+
+envOfConfigmaps:
+  envNODE_ENV:
+    name: NODE_ENV
+    configMapKeyRef:
+      name: env-database
+      key: NODE_ENV
+  envDATABASE:
+    name: DATABASE
+    configMapKeyRef:
+      name: env-database
+      key: DATABASE
+  envPORT:
+    name: PORT
+    configMapKeyRef:
+      name: env-database
+      key: PORT
+  envHOSTNAME:
+    name: HOSTNAME
+    configMapKeyRef:
+      name: env-database
+      key: HOSTNAME
+  envPROTOCOL:
+    name: PROTOCOL
+    configMapKeyRef:
+      name: env-database
+      key: PROTOCOL
+
+ingress:
+  metadeta:
+    name: loginsvc
+  path: /loginsvc
+  serviceName: loginsvc
+  servicePort: 3003
+
+service:
+  serviceMetadata:
+    name: loginsvc
+    labels:
+      app: loginsvc
+  selector:
+    selectorName: loginsvc
+  servicePortConfiguration:
+    protocol: TCP
+    name: loginsvc
+    type: ClusterIP
+    port: 3003
+    targetPort: 3003
+
+serviceMonitor:
+  metadata:
+    name: serviceMonitorLoginsvc
+    labels:
+      app: serviceMonitorLoginsvc
+  specs: 
+    selector:
+      matchLabels:
+        app: serviceMonitorLoginsvc
+    port: loginsvc

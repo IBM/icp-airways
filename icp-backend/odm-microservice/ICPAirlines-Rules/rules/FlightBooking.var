@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.base:VariableSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.base="http://ilog.rules.studio/model/base.ecore">
+  <name>FlightBooking</name>
+  <uuid>eeecbfad-a45c-4368-9b94-5d51285a301d</uuid>
+  <variables name="flightBooking" type="com.icpairlines.rules.Booking" initialValue="" verbalization="the flight booking"/>
+</ilog.rules.studio.model.base:VariableSet>

@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons start>
+        <button ion-button icon-only>
+          <img src="../assets/ibm.png" alt="ibm" height="20" width="40">
+        </button>
+      </ion-buttons>
+      <ion-title color="primary">Booking</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-only color="danger" (click)="cancel()">
+            CANCEL
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <ng-container *ngIf="data">
+      <ion-card class="card-5" *ngFor="let data of data">
+  
+          <ion-item>
+            <ion-icon name="logo-buffer" item-start large color="tab"></ion-icon>
+            <h2>Flight Number</h2>
+            <p>#{{data._id}}</p>
+          </ion-item>
+      
+          <ion-item>
+            <ion-icon name="plane" item-start large color="tab"></ion-icon>
+            <h2>From</h2>
+            <p>{{data.Origin | isoToCountryName}}</p>
+          </ion-item>
+      
+          <ion-item>
+            <ion-icon name="plane" item-start large color="tab"></ion-icon>
+            <h2>To</h2>
+            <p>{{data.Dest | isoToCountryName}}</p>
+          </ion-item>
+      
+          <ion-item>
+            <ion-icon name="time" item-start large color="tab"></ion-icon>
+            <h2>Arrival Time</h2>
+            <p>{{data.ArrTime | timeRefactor}}</p>
+          </ion-item>
+      
+          <ion-item>
+            <ion-icon name="time" item-start large color="tab"></ion-icon>
+            <h2>Departure Time</h2>
+            <p>{{data.DepTime | timeRefactor}}</p>
+          </ion-item>
+      
+          <ion-item>
+              <button ion-button block outline color="tab" (click)="confirm(data._id,data.Origin ,data.Dest )">BOOK</button>
+          </ion-item>
+      
+        </ion-card>
+  </ng-container>
+  
+  </ion-content>
+  <ion-footer no-border>
+
+    <footer>
+      <p class="copyright">© IBM 2019 </p>
+  </footer>
+  
+  </ion-footer>

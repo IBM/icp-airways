@@ -23,10 +23,11 @@ import { LandingComponent } from './landing/landing.component';
 import { SlideAuthComponent } from './slide-auth/slide-auth.component';
 import { EthereumService } from './services/ethereum-service/ethereum.component.service';
 import { OdmService } from './services/odm-service/odm.component.service';
-import { MaterializeModule } from "angular2-materialize";
 import { OdmDetailComponent } from './odm-detail/odm-detail.component';
 import { EmailService } from './services/email-service/email.component.service';
-
+import { XrpService } from './services/xrp-service/xrp.component.service';
+import { NbThemeModule } from '@nebular/theme';
+import { NbSidebarModule, NbLayoutModule, NbSidebarService, NbAlertModule } from '@nebular/theme';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,14 +40,17 @@ import { EmailService } from './services/email-service/email.component.service';
     OdmDetailComponent
   ],
   imports: [
-    MaterializeModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     ROUTING,
     RouterModule,
-    SharedModule
+    SharedModule,
+    NbLayoutModule,
+    NbSidebarModule,
+    NbAlertModule,
+    NbThemeModule.forRoot({ name: 'default' }),
   ],
   providers: [
     Provider,
@@ -59,7 +63,9 @@ import { EmailService } from './services/email-service/email.component.service';
     EthereumService,
     EmailService,
     OdmService,
-    AuthService
+    AuthService,
+    XrpService,
+    NbSidebarService
   ],
   bootstrap: [AppComponent]
 })

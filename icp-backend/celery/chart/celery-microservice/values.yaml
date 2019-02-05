@@ -1,0 +1,67 @@
+replicaCount: 1
+
+metadata:
+ name: celerysvc 
+ label: celerysvc
+
+hpa:
+  metadata:
+    name: celerymicroservicehpa
+  spec:
+    maxReplicas: 10
+    minReplicas: 1
+  metrics:
+    pods:
+      targetAverageValue: 20
+    resource:
+      name: cpu
+      targetAverageUtilization: 50
+    memory:
+      targetAverageUtilization: 80 
+  scaleTargetRef:  
+    name: celerysvc
+
+image:
+  name: celerysvc
+  imageName: "mycluster.icp:8500/default/celery:0.0.2" 
+  imagePullPolicy: Always
+  ports:
+    containerPort: 4000
+  requests:
+    cpu: "50m"
+    memory: "80Mi"
+  limit:
+    cpu: "80"
+    memory: "120Mi"
+
+
+envOfConfigmaps:
+  envCELERY_RESULT_BACKEND:
+    name: CELERY_RESULT_BACKEND
+    configMapKeyRef:
+      name: env-database
+      key: CELERY_RESULT_BACKEND
+  envCELERY_BROKER_URL:
+    name: CELERY_BROKER_URL
+    configMapKeyRef:
+      name: env-database
+      key: CELERY_BROKER_URL
+  envEMAILAPI:
+    name: EMAILAPI
+    configMapKeyRef:
+      name: env-database
+      key: EMAILAPI
+
+service:
+  serviceMetadata:
+    name: celerysvc
+    labels:
+      app: celerysvc
+  selector:
+    selectorName: celerysvc
+  servicePortConfiguration:
+    protocol: TCP
+    name: celerysvc
+    type: ClusterIP
+    port: 4000
+    targetPort: 4000

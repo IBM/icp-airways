@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <img src="../assets/ibm.png" alt="ibm" height="20" width="40">
+      </button>
+    </ion-buttons>
+    <ion-title color="primary">About</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!-- Profile picture -->
+  <div text-center>
+    <img src="../assets/avatar.png" class="edit-avatar" alt="">
+  </div>
+
+  <!-- Form -->
+
+  <ion-list>
+    <ion-item>
+      <ion-icon name="person" item-start color="tab"></ion-icon>
+      {{provider.userData.data.FIRSTNAME + ' '}} {{provider.userData.data.LASTNAME + ' '}} 
+    </ion-item>
+    <ion-item>
+      <ion-icon name="body" item-start color="tab"></ion-icon>
+      {{provider.userData.data.AGE}}  years
+    </ion-item>
+    <ion-item>
+      <ion-icon name="at" item-start color="tab"></ion-icon>
+      {{provider.userData.data.EMAIL}} 
+    </ion-item>
+    <ion-item>
+      <ion-icon name="medal" item-start color="tab"></ion-icon>
+      {{provider.userData.data.TIER}}  class
+    </ion-item>
+  </ion-list>
+
+
+  <!-- Private information form -->
+
+</ion-content>
+
+<ion-footer no-border>
+
+  <footer>
+    <p class="copyright">© IBM 2019 </p>
+</footer>
+
+</ion-footer>

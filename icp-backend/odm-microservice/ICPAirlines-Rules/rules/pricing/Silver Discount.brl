@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ilog.rules.studio.model.brl:ActionRule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ilog.rules.studio.model.brl="http://ilog.rules.studio/model/brl.ecore">
+  <name>Silver Discount</name>
+  <uuid>1ce34632-3c3c-43c6-ac3a-30a8a1aeae53</uuid>
+  <locale>en_US</locale>
+  <definition><![CDATA[ if the customer tier of 'the flight booking' is "SILVER" then
+ for each offer in the offers of 'the flight booking' : 
+-set the cost of this offer to 95/100*the cost of this offer
+-add "Applied 5% discount for Silver Tier" to the messages of 'the flight booking' ;  
+
+]]></definition>
+</ilog.rules.studio.model.brl:ActionRule>

@@ -1,0 +1,174 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: servicemesh
+spec:
+  gateways:
+  - gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: /portal/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: portal.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+    timeout: 5s
+  - match:
+    - uri:
+        prefix: /odmsvc/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: odmsvc.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+    timeout: 5s
+  - match:
+    - uri:
+        prefix: /listingsvc/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: listingsvc.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 3s
+    timeout: 5s
+  - match:
+    - uri:
+        prefix: /loginsvc/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: loginsvc.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+    timeout: 5s
+  - match:
+    - uri:
+        prefix: /emailsvc/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: emailsvc.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+    timeout: 5s
+  - match:
+    - uri:
+        prefix: /bookingsvc/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: bookingsvc.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+    timeout: 5s
+  - match:
+    - uri:
+        prefix: /mapsvc/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: mapsvc.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+    timeout: 5s
+  - match:
+    - uri:
+        prefix: /celerysvc/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: celerysvc.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+    timeout: 5s
+  - match:
+    - uri:
+        prefix: /aisvc/
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: aisvc.default.svc.cluster.local
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+    timeout: 5s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: servicemeshfrontend
+spec:
+  gateways:
+  - gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: ''
+    - headers:
+        user-agent: 
+          regex: '.*iPhone.*'
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: ionic.default.svc.cluster.local
+        subset: ionic
+  - route:
+    - destination:
+        host: angular.default.svc.cluster.local
+        subset: angular
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: destfrontend
+spec:
+  host: '*'
+  subsets:
+  - name: ionic
+    labels:
+      app: ionic
+  - name: angular
+    labels:
+      app: angular

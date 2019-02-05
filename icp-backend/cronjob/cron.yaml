@@ -1,0 +1,129 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: authservicecronjob
+spec:
+  schedule: "*/60 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+            - name: cron
+              image: "mycluster.icp:8500/icp-airways/cron:0.0.1" 
+              args:
+                - /bin/sh
+                - -ec
+                - siege -c 50 -r 1000 -b http://loginsvc.icp-airways:3003/healthz
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: mapcronjob
+spec:
+  schedule: "*/60 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+            - name: cron
+              image: "mycluster.icp:8500/icp-airways/cron:0.0.1" 
+              args:
+                - /bin/sh
+                - -ec
+                - siege -c 50 -r 1000 -b http://mapsvc.icp-airways:3016/healthz
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: odmcronjob
+spec:
+  schedule: "*/60 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+            - name: cron
+              image: "mycluster.icp:8500/icp-airways/cron:0.0.1" 
+              args:
+                - /bin/sh
+                - -ec
+                - siege -c 50 -r 1000 -b http://odmsvc.icp-airways:3005/healthz
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: bookingcronjob
+spec:
+  schedule: "*/60 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+            - name: cron
+              image: "mycluster.icp:8500/icp-airways/cron:0.0.1" 
+              args:
+                - /bin/sh
+                - -ec
+                - siege -c 50 -r 1000 -b http://bookingsvc.icp-airways:3000/healthz
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: listingcronjob
+spec:
+  schedule: "*/60 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+            - name: cron
+              image: "mycluster.icp:8500/icp-airways/cron:0.0.1" 
+              args:
+                - /bin/sh
+                - -ec
+                - siege -c 50 -r 1000 -b http://listingsvc.icp-airways:7000/healthz
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30

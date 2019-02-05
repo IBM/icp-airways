@@ -5,17 +5,15 @@ import { SignupService } from '../signup/signup.component.service';
 import { Provider } from '../provider/provider';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { EthereumService } from '../services/ethereum-service/ethereum.component.service'
-import {MaterializeAction} from 'angular2-materialize';
-
+import { NbSidebarModule, NbLayoutModule, NbSidebarService } from '@nebular/theme';
+import { NgModule } from '@angular/core';
 import * as jwtDecode from 'jwt-decode';
-var Web3 = require('web3')
-
 declare let require: any;
 declare let window: any;
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.css'],
+  styleUrls: ['./landing.component.scss'],
   animations: [translateTrigger]
 })
 export class LandingComponent implements OnInit {
@@ -32,8 +30,7 @@ export class LandingComponent implements OnInit {
   location: String;
   age: Number;
   passwordSignup: String;
-  public modalData = ['GOLD','SILVER','BRONZE']
-  private web3Provider;
+  public modalData = ['GOLD', 'SILVER', 'BRONZE'];
   constructor(
     public ethereumService:EthereumService,
     public loginService: LoginService,
@@ -42,8 +39,6 @@ export class LandingComponent implements OnInit {
     public signupService: SignupService
   ) {
 
-    var web3 = Web3.currentProvider
-    console.log(web3);
 
     setTimeout(() => {
       this.displayHeading = true;
@@ -51,12 +46,12 @@ export class LandingComponent implements OnInit {
   }
   ngOnInit() { }
   test() {
-    this.ethereumService.getBlockchain().subscribe((data) => {
-      console.log('data', data);
-  },
-  (error) => {
-      alert("Login not Succesfull")
-  });
+  //   this.ethereumService.getBlockchain().subscribe((data) => {
+  //     console.log('data', data);
+  // },
+  // (error) => {
+  //     alert("Login not Succesfull")
+  // });
   }
   login() {
     this.loading = true;
@@ -81,7 +76,6 @@ export class LandingComponent implements OnInit {
   }
 
   signup() {
-    console.log(this.tier)
     this.loading = true;
     this.signupService
       .signup(

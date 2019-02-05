@@ -1,0 +1,16 @@
+# The IBM version of this configuration
+version : 0.0.3
+
+container-name-run : "signup-microservice-run"
+
+
+host-path-run : .
+host-path-tools : .
+
+dockerfile-run : "Dockerfile"
+
+image-name-run : "odm-microservice-run"
+
+chart-path: "chart/odm-microservice"
+deploy-target: "container"
+deploy-image-target: "mycluster.icp:8500/default/odm-microservice:0.0.1"

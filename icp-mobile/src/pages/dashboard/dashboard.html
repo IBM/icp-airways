@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <img src="../assets/ibm.png" alt="ibm" height="20" width="40">
+      </button>
+    </ion-buttons>
+    <ion-title color="primary">Travel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ng-container *ngIf="show">
+      <ion-item *ngFor="let listshow of show">
+        <h2>{{listshow.Location.Name}}</h2>
+        <p>{{listshow.Location.Address.County}} • {{listshow.Location.LocationType}}</p>
+        <button ion-button clear item-end (click)="go(listshow.Location.DisplayPosition.Latitude,listshow.Location.DisplayPosition.Longitude)">View</button>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>
+
+<ion-footer no-border>
+
+  <footer>
+    <p class="copyright"> Made by © IBM 2019 </p>
+</footer>
+
+</ion-footer>
