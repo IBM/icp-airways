@@ -244,7 +244,7 @@ $ ssh icpproxyip
 7. Click on parameters tab and add the follow parameters
 ```
 server : youricpip
-path: your folder path you created in your icp proxy
+path: your folder path that you created in your icp proxy
 ```
 > This screenshot is an example
 ![icp3](icp3.png)
@@ -359,9 +359,9 @@ $ docker push <icpdns>:8500/default/ethereumproxy:latest
 
 1. *UID* is ur database username
 2. *PASSWORD* is your database password
-3. *SECRET* is your unique secret you give for your app for JWT authentication
-4. *EMAILUSERNAME* is your gmail email username from which email would be sent
-5. *EMAILPASSWORD* is your email password of your gmail email
+3. *SECRET* is your unique secret you gave for your app for JWT authentication
+4. *EMAILUSERNAME* is your gmail email username from which the email would be sent
+5. *EMAILPASSWORD* is the email password of your gmail email
 6. Navigate to ```secrets``` folder in ```configMaps-secrets/secrets```
 7. Deploy secrets to Kubernetes
 ```
